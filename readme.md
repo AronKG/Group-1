@@ -4,13 +4,13 @@ A group of five students organized and recorded on Canvas, have teamed up to cre
 
 Group Members
 
-| Name        | Github Handle
-| ------------- |:-------------:| -
-| Johan Sollenius      | handle1 |
-| Firstname Lastname     | handle2      |
-| Firstname Lastname | handle3      |
-| Firstname Lastname | handle4      |
-| Firstname Lastname | handle5      |
+| Name          | GitHub Handle |
+|-----------------|--------------|
+| Student 1      | handle1       |
+| Student 2      | handle2       |
+| Student 3      | handle3       |
+| Student 4      | handle4       |
+| Student 5      | handle5       |
 
 Declaration
 
