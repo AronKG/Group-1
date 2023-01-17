@@ -9,7 +9,7 @@ A group of five students organized and recorded on Canvas, have teamed up to cre
 | Student 1        | handle1           |
 | Student 2        | handle2           |
 | Student 3        | handle3           |
-| Student 4        | handle4           |
+| Aron Kesete      | AronKG            |
 | Daniel Johansson | danieljohansson94 |
 
 ## Declaration
