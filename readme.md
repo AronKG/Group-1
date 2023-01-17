@@ -10,7 +10,7 @@ Group Members
 | Student 2      | handle2       |
 | Student 3      | handle3       |
 | Student 4      | handle4       |
-| Student 5      | handle5       |
+| Daniel Johansson      | danieljohansson94       |
 
 Declaration
 
@@ -20,7 +20,7 @@ Student 1: I, Johan Sollenius, declare that I am the sole author of the content 
 Student 2: I, Henrik Eriksson, declare that I am the sole author of the content I add to this repository.
 Student 3: I, Mohamad Alkhaled, declare that I am the sole author of the content I add to this repository.
 Student 4: I, Aron Kesete, declare that I am the sole author of the content I add to this repository.
-Student 5: I, Firstname Lastname, declare that I am the sole author of the content I add to this repository.
+Student 5: I, Daniel Johansson, declare that I am the sole author of the content I add to this repository.
 
 Plan
 
