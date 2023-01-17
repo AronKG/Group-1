@@ -19,7 +19,7 @@ Each of the group members have made an associated commit to this project. The fo
 Student 1: I, Johan Sollenius, declare that I am the sole author of the content I add to this repository.
 Student 2: I, Henrik Eriksson, declare that I am the sole author of the content I add to this repository.
 Student 3: I, Mohamad Alkhaled, declare that I am the sole author of the content I add to this repository.
-Student 4: I, Firstname Lastname, declare that I am the sole author of the content I add to this repository.
+Student 4: I, Aron Kesete, declare that I am the sole author of the content I add to this repository.
 Student 5: I, Firstname Lastname, declare that I am the sole author of the content I add to this repository.
 
 Plan
