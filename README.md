@@ -6,7 +6,7 @@ A group of five students organized and recorded on Canvas, have teamed up to cre
 
 | Name             | Github handle     |
 |------------------|-------------------|
-| Student 1        | handle1           |
+| Johan Sollenius  | 11Johan11         |
 | Student 2        | handle2           |
 | Student 3        | handle3           |
 | Aron Kesete      | AronKG            |
