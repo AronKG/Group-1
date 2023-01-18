@@ -4,23 +4,13 @@ A group of five students organized and recorded on Canvas, have teamed up to cre
 
 ## Group Members
 
-<<<<<<< HEAD:readme.md
-| Name          | GitHub Handle |
-|-----------------|--------------|
-|      |      |
-| Student 2      | handle2       |
-| Student 3      | handle3       |
-| Student 4      | handle4       |
-| Student 5      | handle5       |
-=======
 | Name             | Github handle     |
 |------------------|-------------------|
 | Johan Sollenius  | 11Johan11         |
 | Henrik Eriksson  | HenrikEriksson1   |
-| Mohamad Alkhaled        | Mohamadalkhaled           |
+| Mohamad Alkhaled | Mohamadalkhaled   |
 | Aron Kesete      | AronKG            |
 | Daniel Johansson | danieljohansson94 |
->>>>>>> 6da9d7a31e6ee2dada4dbe623668a754609601ea:README.md
 
 ## Declaration
 
