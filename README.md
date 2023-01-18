@@ -27,6 +27,7 @@ Each of the group members have made an associated commit to this project. The fo
 The project aims to implement a new feature that will improve the overall user experience. The new feature will work by allowing users to interact with the application in a more intuitive way. The project will have the following features:
 
 - [ ] Peer-To-Peer
+- [ ] RSA Encryption
 
 The project will be developed using the following language(s):
 
