@@ -41,6 +41,8 @@ The project will use the following build system:
 
 - Python
 
+You can track the progress of these tasks on our Kanban board: [Project chat-App board](https://github.com/users/AronKG/projects/3)
+
 ## Contribution
 
 Each member of the group has made at least one commit to this project. We have agreed not to use force pushes to the master/main branch. If changes need to be undone, a new commit will be used instead.
