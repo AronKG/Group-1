@@ -6,11 +6,11 @@ A group of five students organized and recorded on Canvas, have teamed up to cre
 
 | Name             | Github handle     |
 |------------------|-------------------|
-| Johan Sollenius  | 11Johan11         |
-| Henrik Eriksson  | HenrikEriksson1   |
-| Mohamad Alkhaled | Mohamadalkhaled   |
-| Aron Kesete      | AronKG            |
-| Daniel Johansson | danieljohansson94 |
+| Johan Sollenius  | [11Johan11](https://github.com/11Johan11) | 
+| Henrik Eriksson  | [HenrikEriksson1](https://github.com/HenrikEriksson1) |
+| Mohamad Alkhaled | [Mohamadalkhaled](https://github.com/Mohamadalkhaled) | 
+| Aron Kesete      | [AronKG](https://github.com/AronKG) | 
+| Daniel Johansson | [danieljohansson94](https://github.com/danieljohansson94) |
 
 ## Declaration
 
