@@ -26,18 +26,17 @@ Each of the group members have made an associated commit to this project. The fo
 
 The project aims to implement a new feature that will improve the overall user experience. The new feature will work by allowing users to interact with the application in a more intuitive way. The project will have the following features:
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
+- [ ] Peer-To-Peer
 
 The project will be developed using the following language(s):
 
-- Language1
-- Language2 
+- Python
+- Html
+- Javascript
 
 The project will use the following build system:
 
-- Build System
+- Python
 
 ## Contribution
 
