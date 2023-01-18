@@ -1,47 +1,58 @@
-Chat App
+# Chat App
 
 A group of five students organized and recorded on Canvas, have teamed up to create a project. The project is being tracked through git and hosted on GitHub. The GitHub repository has been shared with Tuwe (tuvelofstrom) and Rudy (rudymatela) and the repository link has been sent to both Tuwe and Rudy by email or Canvas.
 
-Group Members
+## Group Members
 
+<<<<<<< HEAD:readme.md
 | Name          | GitHub Handle |
 |-----------------|--------------|
-| Mohamad Alkhaled      |MohamadAlkhaled       |
+|      |      |
 | Student 2      | handle2       |
 | Student 3      | handle3       |
 | Student 4      | handle4       |
 | Student 5      | handle5       |
+=======
+| Name             | Github handle     |
+|------------------|-------------------|
+| Johan Sollenius  | 11Johan11         |
+| Henrik Eriksson  | HenrikEriksson1   |
+| Mohamad Alkhaled        | Mohamadalkhaled           |
+| Aron Kesete      | AronKG            |
+| Daniel Johansson | danieljohansson94 |
+>>>>>>> 6da9d7a31e6ee2dada4dbe623668a754609601ea:README.md
 
-Declaration
+## Declaration
 
 Each of the group members have made an associated commit to this project. The following is a list of commits made by each student:
 
-Student 1: I, Johan Sollenius, declare that I am the sole author of the content I add to this repository.
-Student 2: I, Henrik Eriksson, declare that I am the sole author of the content I add to this repository.
-Student 3: I, Mohamad Alkhaled, declare that I am the sole author of the content I add to this repository.
-Student 4: I, Firstname Lastname, declare that I am the sole author of the content I add to this repository.
-Student 5: I, Firstname Lastname, declare that I am the sole author of the content I add to this repository.
+- I, Johan Sollenius, declare that I am the sole author of the content I add to this repository.
+- I, Henrik Eriksson, declare that I am the sole author of the content I add to this repository.
+- I, Mohamad Alkhaled, declare that I am the sole author of the content I add to this repository.
+- I, Aron Kesete, declare that I am the sole author of the content I add to this repository.
+- I, Daniel Johansson, declare that I am the sole author of the content I add to this repository.
 
-Plan
+## Plan
 
 The project aims to implement a new feature that will improve the overall user experience. The new feature will work by allowing users to interact with the application in a more intuitive way. The project will have the following features:
 
-Feature 1
-Feature 2
-Feature 3
+- [ ] Feature 1
+- [ ] Feature 2
+- [ ] Feature 3
 
 The project will be developed using the following language(s):
 
-Language 1
-Language 2
+- Language1
+- Language2 
 
 The project will use the following build system:
 
-Build System
-Contribution
+- Build System
+
+## Contribution
 
 Each member of the group has made at least one commit to this project. We have agreed not to use force pushes to the master/main branch. If changes need to be undone, a new commit will be used instead.
 
-Note
+## Note
 
 Please make sure that your name and email is set properly in your .gitconfig file, to ensure proper credit for your contributions.
