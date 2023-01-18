@@ -7,7 +7,7 @@ A group of five students organized and recorded on Canvas, have teamed up to cre
 | Name             | Github handle     |
 |------------------|-------------------|
 | Johan Sollenius  | 11Johan11         |
-| Student 2        | handle2           |
+| Henrik Eriksson  | HenrikEriksson1   |
 | Student 3        | handle3           |
 | Aron Kesete      | AronKG            |
 | Daniel Johansson | danieljohansson94 |
