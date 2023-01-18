@@ -28,6 +28,7 @@ The project aims to implement a new feature that will improve the overall user e
 
 - [ ] Peer-To-Peer
 - [ ] RSA Encryption
+- [ ] WEB-Based using Flask
 
 The project will be developed using the following language(s):
 
