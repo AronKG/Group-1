@@ -39,7 +39,8 @@ The project will be developed using the following language(s):
 
 The project will use the following build system:
 
-- Python
+- setuptools
+- pip
 
 You can track the progress of these tasks on our Kanban board: [Project chat-App board](https://github.com/users/AronKG/projects/3)
 
