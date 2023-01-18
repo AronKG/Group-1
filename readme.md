@@ -6,7 +6,7 @@ Group Members
 
 | Name          | GitHub Handle |
 |-----------------|--------------|
-| Student 1      | handle1       |
+| Mohamad Alkhaled      |MohamadAlkhaled       |
 | Student 2      | handle2       |
 | Student 3      | handle3       |
 | Student 4      | handle4       |
