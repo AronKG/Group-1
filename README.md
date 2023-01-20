@@ -6,11 +6,11 @@ A group of five students organized and recorded on Canvas, have teamed up to cre
 
 | Name             | Github handle     |
 |------------------|-------------------|
-| Student 1        | handle1           |
-| Student 2        | handle2           |
-| Student 3        | handle3           |
-| Aron Kesete      | AronKG            |
-| Daniel Johansson | danieljohansson94 |
+| Johan Sollenius  | [11Johan11](https://github.com/11Johan11) | 
+| Henrik Eriksson  | [HenrikEriksson1](https://github.com/HenrikEriksson1) |
+| Mohamad Alkhaled | [Mohamadalkhaled](https://github.com/Mohamadalkhaled) | 
+| Aron Kesete      | [AronKG](https://github.com/AronKG) | 
+| Daniel Johansson | [danieljohansson94](https://github.com/danieljohansson94) |
 
 ## Declaration
 
@@ -26,18 +26,23 @@ Each of the group members have made an associated commit to this project. The fo
 
 The project aims to implement a new feature that will improve the overall user experience. The new feature will work by allowing users to interact with the application in a more intuitive way. The project will have the following features:
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
+- [ ] Peer-To-Peer
+- [ ] RSA Encryption
+- [ ] WEB-Based using Flask
+- [ ] Websocket
 
 The project will be developed using the following language(s):
 
-- Language1
-- Language2 
+- Python
+- Html
+- Javascript
 
 The project will use the following build system:
 
-- Build System
+- setuptools
+- pip
+
+You can track the progress of these tasks on our Kanban board: [Project chat-App board](https://github.com/users/AronKG/projects/3)
 
 ## Contribution
 
