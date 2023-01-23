@@ -1,2 +1,6 @@
-msg = "Hello my group!"
-print(msg)
+import sys
+import server
+import client
+
+if __name__ == "__main__":
+    pass

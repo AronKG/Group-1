@@ -1,3 +1,4 @@
 # ignore all .BIN file
 *.BIN
 .vscode/*
+__pycache__/*
