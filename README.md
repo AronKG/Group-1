@@ -2,6 +2,9 @@
 
 A group of five students organized and recorded on Canvas, have teamed up to create a project. The project is being tracked through git and hosted on GitHub. The GitHub repository has been shared with Tuwe (tuvelofstrom) and Rudy (rudymatela) and the repository link has been sent to both Tuwe and Rudy by email or Canvas.
 
+## About the Project
+The project aims to be a simple yet powerful chat app where users have a unique identifer which the user can share with others to connect and communicate with one another. Users will interact using a simple yet elegant user interface hosted on the local computer. The application uses websockets which uses the default HTTP ports so you dont have to open ports in the router. To start with, the application will only support ascii communication but will hopefully support utf-8 and VoIP future on. 
+
 ## Group Members
 
 | Name             | Github handle     |
