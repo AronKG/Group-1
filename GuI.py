@@ -6,7 +6,7 @@ app = Flask(__name__)
 messages = []
 
 @app.route("/", methods=["GET", "POST"])
-def index():
+def sms():
     if request.method == "POST":
         message = request.form["message"]
         messages.append(message)
@@ -17,5 +17,5 @@ def messages_route():
     return render_template("messages.html", messages=messages)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
 
