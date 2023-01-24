@@ -1,7 +1,8 @@
 import sys
-import server
-import client
+from server import Server
+from client import Client
 import time
+from threading import Thread
 
 server = Server()
 t = Thread(target=server.run)
