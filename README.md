@@ -50,6 +50,11 @@ You can track the progress of these tasks on our Kanban board: [Project chat-App
 ## Installation
     python3 main.py
 
+## Unit testing
+To test the program simply write
+    
+    python3 test.py
+
 ## Linter
 Black can be installed by running 
 
