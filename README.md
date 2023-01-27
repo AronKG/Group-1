@@ -53,7 +53,7 @@ You can track the progress of these tasks on our Kanban board: [Project chat-App
 ## Linter
 Black can be installed by running 
 
-    pip install black. 
+    pip install black
     
 It requires Python 3.7+ to run.
 To run the black linter you simply write
