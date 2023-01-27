@@ -60,8 +60,8 @@ Run the test file with coverage by using the command
     coverage run -m unittest test.py
 
 Once the tests have been run, use the command 
-   
-   coverage report 
+
+    coverage report 
     
 to view the coverage report. This will show the percentage of lines covered in your code.
 
