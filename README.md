@@ -50,6 +50,14 @@ You can track the progress of these tasks on our Kanban board: [Project chat-App
 ## Installation
     python3 main.py
 
+## Linter
+Black can be installed by running 
+    pip install black. 
+It requires Python 3.7+ to run.
+To run the black linter you simply write
+    black {source_file_or_directory}
+Further information [here](https://github.com/psf/black)
+
 ## Contribution
 
 Each member of the group has made at least one commit to this project. We have agreed not to use force pushes to the master/main branch. If changes need to be undone, a new commit will be used instead.
