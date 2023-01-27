@@ -51,9 +51,19 @@ You can track the progress of these tasks on our Kanban board: [Project chat-App
     python3 main.py
 
 ## Unit testing
-To test the program simply write
+Install the coverage.py library by running 
+
+    pip install coverage
+
+Run the test file with coverage by using the command 
+
+    coverage run -m unittest test.py
+
+Once the tests have been run, use the command 
+   
+   coverage report 
     
-    python3 test.py
+to view the coverage report. This will show the percentage of lines covered in your code.
 
 ## Linter
 Black can be installed by running 
