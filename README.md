@@ -74,7 +74,7 @@ To run this project, you will need to have Python 3 installed on your system.
 where `host` is the hostname or IP address of the server and `port` is the port number of the server.
 For example:    
 
-    python client.py 192.168.1.4 3000
+    ```python client.py 192.168.1.4 3000```
 
 
 6. Once connected, you can start sending and receiving messages via the chat.
