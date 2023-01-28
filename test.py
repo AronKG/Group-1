@@ -31,7 +31,9 @@ class TestClientServer(unittest.TestCase):
 
 
 print("inmplementing new featurs")
+
 #tying to make a conflict between main and new-feature-implementation branch
 print("a conflict that will be resolved")
+print("This conflict is resolved")
 if __name__ == '__main__':
     unittest.main()
