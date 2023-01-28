@@ -1,5 +1,6 @@
 import asyncio
 import websockets
+import argparse
 
 class Client:
     
@@ -17,5 +18,10 @@ class Client:
                 response = await websocket.recv()
                 print(f'Received: {response}')
 
-client = Client(host="192.168.1.4")
-asyncio.get_event_loop().run_until_complete(client.start_chat())
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='WebSocket Client')
+    parser.add_argument('host', type=str, help='hostname or IP address of the server')
+    parser.add_argument('port', type=int, help='port number of the server')
+    args = parser.parse_args()
+    client = Client(args.host, args.port)
+    asyncio.get_event_loop().run_until_complete(client.start_chat())
