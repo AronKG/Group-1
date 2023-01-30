@@ -2,7 +2,11 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
+@app.route("/")
+def home():
+    return render_template("index.html")
 
+"""
 messages = []
 
 @app.route("/", methods=["GET", "POST"])
@@ -15,7 +19,8 @@ def index():
 @app.route("/messages")
 def messages_route():
     return render_template("messages.html", messages=messages)
+"""
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
 
