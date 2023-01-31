@@ -1,32 +1,22 @@
 import sys
 import socket
 from threading import Thread
-
 print("client.py")
 
 class Client:
-    def __init__(self, host, port):
+    def __init__(self, host="localhost", port=3000):
         self.clientsocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.clientsocket.connect((host, port))
-
+        self.clientsocket.connect((host,port))
+    
     def send_message(self, message):
-        self.clientsocket.send(message.encode())
-        self.get_response()
+        self.clientsocket.send(message.encode('ascii'))
+        print(f'client sent: {message}')
 
     def get_response(self):
-        print("Server: ", self.clientsocket.recv(4096).decode())
+        rmsg = self.clientsocket.recv(4096).decode('ascii')
+        return rmsg
 
-    def close_connection(self):
-        self.send_message("quit")
+
+    def close(self):
+        self.clientsocket.send("quit".encode('ascii'))
         self.clientsocket.close()
-
-if __name__ == '__main__':
-    host = sys.argv[1] if len(sys.argv) > 1 else 'localhost'
-    port = int(sys.argv[2]) if len(sys.argv) > 2 else 3000
-    client = Client(host, port)
-    while True:
-        message = input("You: ")
-        client.send_message(message)
-        if message == 'quit':
-            break
-    client.close_connection()
