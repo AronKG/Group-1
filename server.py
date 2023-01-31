@@ -1,38 +1,22 @@
-import asyncio
-import websockets
+import socket
+from threading import Thread
+
+print("Server.py")
 
 class Server:
-    clients = set()
+    def __init__(self, host="localhost", port=3000):
+        self.serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.serversocket.bind((host,port))
+        print("Listening on port " + str(port))
 
-    def __init__(self,ip="localhost",port=3000):
-        self.ip = ip;
-        self.port = port;
-        
-    async def register(self,websocket):
-        self.clients.add(websocket)
-        print(f'{websocket} connected')
-
-    async def unregister(self,websocket):
-        self.clients.remove(websocket)
-        print(f'{websocket} disconnected')
-
-    async def broadcast(self, message):
-        if self.clients:
-            await asyncio.wait([client.send(message) for client in self.clients])
-
-    async def chat_handler(self, websocket, path):
-        await self.register(websocket)
-        try:
-            async for message in websocket:
-                await self.broadcast(message)
-        finally:
-            await self.unregister(websocket)
-
-    def start_server(self):
-        print(f"Server running on {self.ip} on port {self.port}")
-        start_server = websockets.serve(self.chat_handler, self.ip, self.port)
-        asyncio.get_event_loop().run_until_complete(start_server)
-        asyncio.get_event_loop().run_forever()
-
-server = Server(ip="192.168.1.4")
-server.start_server()
+    def run(self):
+        self.serversocket.listen(5)
+        clientsocket, addr = self.serversocket.accept()
+        while True:
+            rmsg = clientsocket.recv(4096).decode()
+            print("client: ",rmsg)
+            if rmsg == 'quit':
+                clientsocket.send(b"Server is closing your connection")
+                break
+            else:
+                clientsocket.send(rmsg.encode('ascii')) 
