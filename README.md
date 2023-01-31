@@ -90,13 +90,16 @@ Install the coverage.py library by running
 
 Run the test file with coverage by using the command 
 
-    coverage run -m unittest test.py
+    coverage run -m unittest 
 
 Once the tests have been run, use the command 
 
     coverage report 
     
 to view the coverage report. This will show the percentage of lines covered in your code.
+
+You can also use pytest by running
+    pytest
 
 ## Linter
 Black can be installed by running 

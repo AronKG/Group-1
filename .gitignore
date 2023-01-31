@@ -2,3 +2,4 @@
 *.BIN
 .vscode/*
 __pycache__/*
+.coverage
