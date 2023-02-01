@@ -13,6 +13,6 @@ jobs:
      - run: python --version
      - run: ls # temporary debug
      - run: python server.py
-     #- run: python src/client.py
-     #- run: python src/FlaskMessageBoard.py
-     #- run: coverage run -m unittest
+     - run: python client.py
+     - run: python FlaskMessageBoard.py
+     - run: coverage run -m unittest
