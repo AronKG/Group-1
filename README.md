@@ -1,5 +1,6 @@
 # Chat App
-[![Build Status for Chat App in Python][build-status]][build-log]
+![](https://github.com/AronKG/Group-1/actions/workflows/build.yml/badge.svg)
+
 A group of five students organized and recorded on Canvas, have teamed up to create a project. The project is being tracked through git and hosted on GitHub. The GitHub repository has been shared with Tuwe (tuvelofstrom) and Rudy (rudymatela) and the repository link has been sent to both Tuwe and Rudy by email or Canvas.
 
 ## About the Project
