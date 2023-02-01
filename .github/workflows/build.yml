@@ -1,13 +1,17 @@
 name: build
 run-name: Build and Test Project
-on: [push]
+on: [push,pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - run: gcc -v
-      - run: gcc -c -o revlib.o revlib.c
-      - run: gcc reverse.c revlib.o -o reverse
-      - run: echo 2345 | ./reverse  # runs the program
-      - run: make test
+     - uses: actions/checkout@v3
+     - uses: actions/setup-python@v3
+       with:
+        python-version: "3.10"
+     - run: pip install pytest
+     - run: python --version
+     - run: python src/client.py
+     - run: python src/server.py
+     - run: python src/FlaskMessageBoard.py
+     - run: coverage run -m unittest
