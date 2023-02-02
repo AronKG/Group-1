@@ -5,9 +5,14 @@ print("client.py")
 
 class Client:
     def __init__(self, host="localhost", port=3000):
-        self.clientsocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.host = host
+        self.port = port
+        self.connect()
+
+    def connect(self): # connect method is used to reconnect automatically to server in case of a discconection
         try:
-            self.clientsocket.connect((host, port))
+            self.clientsocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.clientsocket.connect((self.host, self.port))
         except socket.error as msg:
             print(f"Error while connecting to the server: {msg}")
             sys.exit()
@@ -18,7 +23,7 @@ class Client:
             print(f'client sent: {message}')
         except socket.error as msg:
             print(f"Error while sending message to the server: {msg}")
-            sys.exit()
+            self.connect()
 
     def get_response(self):
         try:
@@ -26,7 +31,7 @@ class Client:
             return rmsg
         except socket.error as msg:
             print(f"Error while receiving message from the server: {msg}")
-            sys.exit()
+            self.connect()
 
     def close(self):
         try:
