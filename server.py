@@ -1,47 +1,23 @@
 import socket
 from threading import Thread
-from socket import error as SocketError
-import errno
-import sys
+
+print("Server.py")
 
 class Server:
     def __init__(self, host="localhost", port=3000):
         self.serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        try:
-            self.serversocket.bind((host,port))
-        except SocketError as e:
-            if e.errno == errno.EADDRINUSE:
-                print(f"Address {host}:{port} already in use")
-                self.serversocket.close()
-                sys.exit(1)
+        self.serversocket.bind((host,port))
         print("Listening on port " + str(port))
+
 
     def run(self):
         self.serversocket.listen(5)
-        try:
-            clientsocket, addr = self.serversocket.accept()
-        except SocketError as e:
-            if e.errno == errno.EINTR:
-                print("The server socket was closed")
-                self.serversocket.close()
-                sys.exit(1)
+        clientsocket, addr = self.serversocket.accept()
         while True:
-            try:
-                rmsg = clientsocket.recv(4096).decode('ascii')
-            except SocketError as e:
-                if e.errno == errno.ECONNRESET:
-                    print("The client socket was closed")
-                    clientsocket.close()
-                    sys.exit(1)
+            rmsg = clientsocket.recv(4096).decode('ascii')
             print(f'server recived: {rmsg}')
             if rmsg == 'quit':
                 self.serversocket.close()
                 return
             else:
-                try:
-                    clientsocket.send(rmsg.encode('ascii'))
-                except SocketError as e:
-                    if e.errno == errno.EPIPE:
-                        print("The client socket was closed")
-                        clientsocket.close()
-                        sys.exit(1)
+                clientsocket.send(rmsg.encode('ascii')) 
