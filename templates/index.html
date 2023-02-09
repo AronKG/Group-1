@@ -15,7 +15,6 @@
         border: 1px solid #ccc;
         box-shadow: 2px 2px 4px #ccc;
         border-radius: 4px;
-        overflow-y: scroll;
       }
       .chat-header {
         background-color: #f5f5f5;
@@ -36,11 +35,12 @@
         padding: 10px;
         background-color: #f5f5f5;
         border-radius: 4px;
-        max-width: 80%;
+        max-width: 100%;
       }
       .message-username {
         font-weight: bold;
         margin-right: 10px;
+        font-family: "Courier New";
       }
       .chat-input {
         padding: 10px;
@@ -53,6 +53,7 @@
         border: 1px solid #ccc;
         border-radius: 4px;
         outline: none;
+        font-family: "Courier New";
       }
       .chat-input button {
         padding: 5px 10px;
@@ -61,19 +62,37 @@
         border: none;
         border-radius: 4px;
         cursor: pointer;
+        font-family: "Courier New";
+      }
+      @font-face{
+        font-family: gagga;
+        src: url("LEMONMILK-Bold.otf") format("opentype");
+      }
+      @font-face{
+        font-family: "Courier New", Courier New, Monospace;
+      }
+      #grönis {
+        background-color: #608e45;
+        color: whitesmoke;
+        font-family: gagga;
+        font-size: 50px;
+        margin: 10px;
+      }
+      .message-sent{
+        font-family: "Courier New";
       }
     </style>
   </head>
   <body>
     <div class="chat-container">
-      <div class="chat-header">
-        Chat App
+      <div class="chat-header" id="grönis">
+        <h1 id = "grönis">Gagga</h1>
       </div>
       <div class="chat-messages">
         <!-- Add messages here -->
         <div class="message">
           <span class="message-username">Username:</span>
-          Message text
+          <span class ="message-sent">Goddag</span>
         </div>
       </div>
       <div class="chat-input">
