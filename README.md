@@ -66,7 +66,7 @@ To run this project, you will need to have Python 3 installed on your system.
     
 4. To run the server, open a terminal and execute the following command  
 
-    ```python server.py --host [ip] --port [port]```
+    ```python server.py --host 127.0.0.1 --port 80```
     
 5. Navigate to the web with the specified ip&port and start chatting!
 
