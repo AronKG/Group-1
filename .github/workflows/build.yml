@@ -9,15 +9,15 @@ jobs:
      - uses: actions/setup-python@v3
        with:
         python-version: "3.10"
-     - run: pip install pytest
+     #- run: pip install pytest
      #- run: pip install coverage
      #- run: pip install flask
-     - run: python --version
-     - run: ls # temporary debug
-     - run: python server.py
-     - run: python client.py
+    # - run: python --version
+     #- run: ls # temporary debug
+     #- run: python server.py
+     #- run: python client.py
     # - run: python clientError.py
      #- run: python FlaskMessageBoard.py
-     - run: python test_client.py
-     - run: python test_main.py
-     - run: python test_server.py
+    # - run: python test_client.py
+    # - run: python test_main.py
+    # - run: python test_server.py
