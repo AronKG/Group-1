@@ -17,7 +17,7 @@ jobs:
      #- run: python server.py
      #- run: python client.py
     # - run: python clientError.py
-     #- run: python FlaskMessageBoard.py
+     - run: python flask.py
     # - run: python test_client.py
     # - run: python test_main.py
     # - run: python test_server.py
