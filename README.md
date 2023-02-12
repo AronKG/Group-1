@@ -116,7 +116,7 @@ Further information [here](https://github.com/psf/black)
 
 ## Contribution
 
-Each member of the group has made at least one commit to this project. We have agreed not to use force pushes to the master/main branch. If changes need to be undone, a new commit will be used instead.
+Each member of the group has made at least one commit to this project. We have agreed not to use force pushes to the master/main branch. If changes need to be undone, a new commit will be used instead.-
 
 ## Note
 
