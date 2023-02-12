@@ -3,6 +3,7 @@ from flask_socketio import SocketIO, emit
 import time
 import os
 import random
+import argparse
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -39,6 +40,12 @@ def chat():
     return render_template("chat.html", username=session['username'],messages=messages)
     
 
+
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--host", type=str, default='0.0.0.0')
+    parser.add_argument("--port", type=int, default=80)
+    args = parser.parse_args()
+
+    socketio.run(app, debug=True, host=args.host, port=args.port)
 
