@@ -36,7 +36,7 @@ def chat():
             username = session['username']
             socketio.emit("new_connect", f"{username} connected to the chat!", broadcast=True) 
     
-    return render_template("index.html", username=session['username'],messages=messages)
+    return render_template("chat.html", username=session['username'],messages=messages)
     
 
 if __name__ == '__main__':
