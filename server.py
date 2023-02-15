@@ -11,6 +11,9 @@ socketio = SocketIO(app)
 
 messages = []
 
+#add words that will filtered 
+SPAM_KEYWORDS =['Fuck','fuck']
+
 @app.route("/")
 def home():
     #Om man redan är inloggad
@@ -21,8 +24,9 @@ def home():
 
 @socketio.on("message") #Om vi får socket emit med message (någon har skickat ett meddelande)
 def handle_message(data):
-    messages.append(data) #Så dem som ansluter senare kan se alla gammla meddelanden
-    emit("new_message", data, broadcast=True) #Meddela att ett nytt meddelande har skickats till alla (broadcast)
+    if not contains_spam(data):
+        messages.append(data) #Så dem som ansluter senare kan se alla gammla meddelanden
+        emit("new_message", data, broadcast=True) #Meddela att ett nytt meddelande har skickats till alla (broadcast)
     
 @app.route("/chat", methods=["POST", "GET"])
 def chat():
@@ -39,7 +43,11 @@ def chat():
     
     return render_template("chat.html", username=session['username'],messages=messages)
     
-
+def contains_spam(message):
+    for keyword in SPAM_KEYWORDS:
+        if keyword in message.lower():
+            return True
+    return False
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
