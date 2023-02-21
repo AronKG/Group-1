@@ -11,8 +11,8 @@ socketio = SocketIO(app)
 
 messages = []
 
-#add words that will filtered 
-SPAM_KEYWORDS =['Fuck','fuck']
+#add any words that will be filtered 
+SPAM_KEYWORDS =['Fuck']
 
 @app.route("/")
 def home():
