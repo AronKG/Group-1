@@ -45,7 +45,7 @@ def chat():
     
 def contains_spam(message):
     for keyword in SPAM_KEYWORDS:
-        if keyword in message.lower():
+        if keyword.lower() in message.lower():
             return True
     return False
 
