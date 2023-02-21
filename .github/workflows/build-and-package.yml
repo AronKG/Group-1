@@ -1,0 +1,32 @@
+name: Build and package app
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-package:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: |
+        python -m venv venv
+        source venv/bin/activate
+        pip install -r requirements.txt
+
+    - name: Build app
+      run: |
+        python setup.py sdist
+        mkdir -p dist
+        cp dist/*.tar.gz dist/app.tar.gz
+
+    - name: Package app
+      uses: actions/upload-artifact@v2
+      with:
+        name: app-package
+        path: dist/app.tar.gz
