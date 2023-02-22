@@ -24,6 +24,9 @@ def home():
 
 @socketio.on("message") #Om vi får socket emit med message (någon har skickat ett meddelande)
 def handle_message(data):
+    #prevent html injections
+    data["message"] = data["message"].replace("<", "&lt;")
+    data["message"] = data["message"].replace(">", "&gt;")
     if not contains_spam(data):
         messages.append(data) #Så dem som ansluter senare kan se alla gammla meddelanden
         emit("new_message", data, broadcast=True) #Meddela att ett nytt meddelande har skickats till alla (broadcast)
