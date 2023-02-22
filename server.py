@@ -7,6 +7,7 @@ import argparse
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
+app.use_x_sendfile = False
 socketio = SocketIO(app)
 
 messages = []
