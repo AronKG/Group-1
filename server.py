@@ -46,9 +46,9 @@ def chat():
     
     return render_template("chat.html", username=session['username'],messages=messages)
     
-def contains_spam(message):
+def contains_spam(data):
     for keyword in SPAM_KEYWORDS:
-        if keyword.lower() in message.lower():
+        if keyword.lower() in data["message"].lower():
             return True
     return False
 
