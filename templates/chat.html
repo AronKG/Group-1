@@ -173,7 +173,7 @@
 		var messageInput = document.getElementById("message-input").value;
 		var data = {
 		username: "{{username}}",
-		message: message: preventHTML(messageInput)
+		message: preventHTML(messageInput)
 		};
 		socket.emit("message", data);
 		document.getElementById("message-input").value = "";
