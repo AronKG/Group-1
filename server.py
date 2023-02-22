@@ -26,6 +26,8 @@ def home():
 @socketio.on("message") #Om vi får socket emit med message (någon har skickat ett meddelande)
 def handle_message(data):
     #prevent html injections
+    data["username"] = data["username"].replace("<", "&lt;")
+    data["username"] = data["username"].replace(">", "&gt;")
     data["message"] = data["message"].replace("<", "&lt;")
     data["message"] = data["message"].replace(">", "&gt;")
     if not contains_spam(data):
