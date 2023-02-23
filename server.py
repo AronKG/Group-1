@@ -61,5 +61,5 @@ if __name__ == '__main__':
     parser.add_argument("--port", type=int, default=80)
     args = parser.parse_args()
 
-    socketio.run(app, debug=True, host=args.host, port=args.port)
+    socketio.run(app, debug=True, host=args.host, port=args.port, allow_unsafe_werkzeug=True)
 
