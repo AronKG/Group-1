@@ -193,7 +193,23 @@
       </div>
       
 	<script>
+			// Emit a request to get all currently chatting users
+	time=setInterval(function(){
+socket.emit("get_users");
+},5000);
 	
+
+	// Receive the list of currently chatting users from the server
+	socket.on("all_users", function(users) {
+	  var userList = document.querySelector(".chat-users ul");
+	  userList.innerHTML = "";
+	  for (var i in users) {
+		var user = document.createElement("li");
+		user.textContent = users[i];
+		userList.appendChild(user);
+	  }
+	});
+		
  	function preventHTML(message)
       {
         var newMessage = message;
