@@ -15,7 +15,7 @@ jobs:
      - run: pip install Flask-SocketIO
     # - run: python --version
      #- run: ls # temporary debug
-     - run: python server.py
+     - run: python server.py --host 127.0.0.1 --port 5000
      - run: python test.py
      #- run: python client.py
     # - run: python clientError.py
