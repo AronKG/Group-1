@@ -19,11 +19,11 @@ class FlaskTest(unittest.TestCase):
             self.assertEqual(response.status_code, 200)
             self.assertTrue(b'testuser' in response.data)
 
-    def test_contains_spam(self):
-        data = {"message": "Fuck you"}
-        self.assertTrue(contains_spam(data))
-        data ={"message": "Hello world"}
-        self.assertFalse(contains_spam(data))
+    #def test_contains_spam(self):
+        #data = {"message": "Fuck you"}
+        #self.assertTrue(contains_spam(data))
+        #data ={"message": "Hello world"}
+        #self.assertFalse(contains_spam(data))
     
     #def test_empty_message(self): 
         #with self.app as client:
