@@ -5,12 +5,45 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.0/socket.io.js"></script>
     <title>Chat App</title>
     <style>
+
+      .chat-users {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 200px;
+      height: 100%;
+      background-color: #4CAF50;
+      color: whitesmoke;
+      border: 1px solid #ccc;
+      box-shadow: 2px 2px 4px #ccc;
+      border-radius: 4px;
+      padding: 10px;
+      font-family: gagga;
+    }
+
+      .chat-users h3 {
+        margin-top: 0;
+        font-size: 16px;
+      }
+
+      .chat-users ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .chat-users li {
+        margin-bottom: 5px;
+        font-size: 14px;
+        font-family: "Courier New";
+      }
+
       /* Add styles for the chat app */
       .chat-container {
         display: flex;
         flex-direction: column;
         height: 700px;
-        width: 500px;
+        width: 800px;
         margin: 0 auto;
         background-color: #fff;
         border: 1px solid #ccc;
@@ -75,6 +108,7 @@
       @font-face{
         font-family: "Courier New", Courier New, Monospace;
       }
+
       #grönis {
         background-color: #608e45;
         color: whitesmoke;
@@ -147,7 +181,17 @@
         <input id="message-input" type="text" placeholder="Enter your message">
         <button id="send-button" type="submit">Send</button>
       </div>
-	  
+
+      <div class="chat-users">
+        <h3>Currently chatting:</h3>
+        <ul>
+          <li>User1</li>
+          <li>User2</li>
+          <li>User3</li>
+          <li>User4</li>
+        </ul>
+      </div>
+      
 	<script>
 	
  	function preventHTML(message)
