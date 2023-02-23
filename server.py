@@ -4,6 +4,22 @@ import time
 import os
 import random
 import argparse
+from profanity import profanity
+
+
+#add any words that will be filtered
+with open("Profanitylists/Profanity_SE.txt", "r") as file:
+    words = file.readlines()
+    words = [line.rstrip() for line in words]
+
+with open("Profanitylists/Profanity_EN.txt", "r") as file:
+    words2 = file.readlines()
+    words2 = [line.rstrip() for line in words2]
+
+for word in words2:
+    words.append(word)
+
+profanity.load_words(words)
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -13,7 +29,6 @@ socketio = SocketIO(app)
 messages = []
 
 #add any words that will be filtered 
-SPAM_KEYWORDS =['Fuck']
 
 @app.route("/")
 def home():
@@ -30,10 +45,13 @@ def handle_message(data):
     data["username"] = data["username"].replace(">", "&gt;")
     data["message"] = data["message"].replace("<", "&lt;")
     data["message"] = data["message"].replace(">", "&gt;")
-    if not contains_spam(data):
-        messages.append(data) #Så dem som ansluter senare kan se alla gammla meddelanden
-        emit("new_message", data, broadcast=True) #Meddela att ett nytt meddelande har skickats till alla (broadcast)
-    
+    data["message"] = profanity.censor(data["message"])
+    data["username"] = profanity.censor(data["username"])
+
+
+    messages.append(data) #Så dem som ansluter senare kan se alla gammla meddelanden
+    emit("new_message", data, broadcast=True) #Meddela att ett nytt meddelande har skickats till alla (broadcast)
+
 @app.route("/chat", methods=["POST", "GET"])
 def chat():
 
@@ -49,16 +67,11 @@ def chat():
     
     return render_template("chat.html", username=session['username'],messages=messages)
     
-def contains_spam(data):
-    for keyword in SPAM_KEYWORDS:
-        if keyword.lower() in data["message"].lower():
-            return True
-    return False
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("--host", type=str, default='127.0.0.1')
-    parser.add_argument("--port", type=int, default=5000)
-    parser.add_argument("--test", type=int, default=0)
+    parser.add_argument("--host", type=str, default='0.0.0.0')
+    parser.add_argument("--port", type=int, default=80)
     args = parser.parse_args()
-    socketio.run(app, debug=True, host=args.host, port=args.port, allow_unsafe_werkzeug=True)
+
+    socketio.run(app, debug=True, host=args.host, port=args.port)
