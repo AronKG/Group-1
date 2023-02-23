@@ -5,7 +5,10 @@ import os
 import random
 import argparse
 from profanity import profanity
+from collections import defaultdict
 
+# Keep track of the time of the last message for each user
+last_message_time = defaultdict(float)
 
 #add any words that will be filtered
 with open("Profanitylists/Profanity_SE.txt", "r") as file:
@@ -38,8 +41,21 @@ def home():
         
     return render_template("login.html")
 
-@socketio.on("message") #Om vi får socket emit med message (någon har skickat ett meddelande)
+@socketio.on("message")
 def handle_message(data):
+    username = data["username"]
+    message = data["message"]
+
+    # Check if the user has sent too many messages too quickly
+    now = time.monotonic()
+    time_since_last_message = now - last_message_time[username]
+    if time_since_last_message < 1 and username != "admin":
+        # Reject the message
+        return
+
+    # Update the last message time for the user
+    last_message_time[username] = now
+
     #prevent html injections
     data["username"] = data["username"].replace("<", "&lt;")
     data["username"] = data["username"].replace(">", "&gt;")
