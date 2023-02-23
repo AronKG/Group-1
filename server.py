@@ -62,7 +62,7 @@ def chat():
         if("username" in request.form):
             session['username'] = request.form['username']
 
-            username = session['username']
+            username = profanity.censor(session['username'])
             socketio.emit("new_connect", f"{username} connected to the chat!", broadcast=True) 
     
     return render_template("chat.html", username=session['username'],messages=messages)
