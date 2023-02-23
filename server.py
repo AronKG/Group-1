@@ -10,6 +10,9 @@ from collections import defaultdict
 # Keep track of the time of the last message for each user
 last_message_time = defaultdict(float)
 
+# Keep track of the list of currently chatting users
+users = set()
+
 #add any words that will be filtered
 with open("Profanitylists/Profanity_SE.txt", "r") as file:
     words = file.readlines()
@@ -64,9 +67,18 @@ def handle_message(data):
     data["message"] = profanity.censor(data["message"])
     data["username"] = profanity.censor(data["username"])
 
-
     messages.append(data) #Så dem som ansluter senare kan se alla gammla meddelanden
     emit("new_message", data, broadcast=True) #Meddela att ett nytt meddelande har skickats till alla (broadcast)
+
+    # Update the list of currently chatting users
+    if username not in users:
+        users.add(username)
+        emit("all_users", list(users), broadcast=True)
+
+@socketio.on("get_users")
+def handle_get_users():
+    # Emit the list of currently chatting users to the client that requested it
+    emit("all_users", list(users))
 
 @app.route("/chat", methods=["POST", "GET"])
 def chat():
@@ -79,7 +91,8 @@ def chat():
             session['username'] = request.form['username']
 
             username = profanity.censor(session['username'])
-            socketio.emit("new_connect", f"{username} connected to the chat!", broadcast=True) 
+            socketio.emit("new_connect", f"{username} connected to the chat!", broadcast=True)
+            users.add(username)
     
     return render_template("chat.html", username=session['username'],messages=messages)
     
