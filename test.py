@@ -1,6 +1,6 @@
 import unittest
 import tempfile
-from server import app, contains_spam
+from server import app
 
 class FlaskTest(unittest.TestCase):
     def setUp(self):
