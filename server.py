@@ -4,9 +4,6 @@ import time
 import os
 import random
 import argparse
-import threading
-import time
-import requests
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -58,27 +55,10 @@ def contains_spam(data):
             return True
     return False
 
-def run_server():
-    socketio.run(app, debug=True, host=args.host, port=args.port, allow_unsafe_werkzeug=True)
-    
-@app.route('/shutdown', methods=['POST'])
-def shutdown():
-    request.environ.get('werkzeug.server.shutdown')()
-    return 'Server shutting down...'
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--host", type=str, default='127.0.0.1')
     parser.add_argument("--port", type=int, default=5000)
     parser.add_argument("--test", type=int, default=0)
     args = parser.parse_args()
-    
-    if not args.test:
-        socketio.run(app, debug=True, host=args.host, port=args.port, allow_unsafe_werkzeug=True)
-    else: #Run the server on separate thread for 10 seconds if we're just testing
-        server_thread = threading.Thread(target=run_server)
-        server_thread.start()        
-        time.sleep(10)  # delay execution for 10 seconds
-        requests.post(f'http://{args.host}:{args.port}/shutdown')  # send a shutdown request
-        #socketio.stop()  # stop the server
-        server_thread.join()  # wait for the server thread to finish
+    socketio.run(app, debug=True, host=args.host, port=args.port, allow_unsafe_werkzeug=True)
