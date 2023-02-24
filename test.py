@@ -15,6 +15,8 @@ class FlaskTest(unittest.TestCase):
         with self.app as client:
             with client.session_transaction() as session:
                 session['username'] = 'testuser'
+                session['id'] = 123456
+            users = {123456: 'testuser'}
             response = self.app.get('/chat')
             self.assertEqual(response.status_code, 200)
             self.assertTrue(b'testuser' in response.data)
