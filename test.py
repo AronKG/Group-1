@@ -2,9 +2,6 @@ import unittest
 import tempfile
 from server import app
 
-import unittest
-from server import app
-
 class TestChatApp(unittest.TestCase):
 
     def setUp(self):
