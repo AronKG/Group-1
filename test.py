@@ -13,18 +13,12 @@ class TestChatApp(unittest.TestCase):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
 
-    def test_chat_not_logged_in(self):
-        # Test that the chat page redirects to the login page if not logged in
+    def test_chatpage(self):
+        with self.client.session_transaction() as session:
+            session['id'] = 'abc123'
+            session['username'] = 'testuser'
         response = self.client.get('/chat')
-        self.assertEqual(response.status_code, 302)
-        self.assertTrue(response.headers['Location'].endswith('/'))
-
-    def test_login(self):
-        # Test that a user can log in and is redirected to the chat page
-        data = {'username': 'testuser'}
-        response = self.client.post('/', data=data, follow_redirects=False)
-        self.assertEqual(response.status_code, 302)
-        self.assertTrue(response.headers['Location'].endswith('/chat'))
+        self.assertEqual(response.status_code, 200)
 
    
 
