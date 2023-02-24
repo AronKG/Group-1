@@ -6,12 +6,16 @@ import random
 import argparse
 from profanity import profanity
 from collections import defaultdict
+import secrets
 
 # Keep track of the time of the last message for each user
 last_message_time = defaultdict(float)
 
-# Keep track of the list of currently chatting users
-users = set()
+
+#id: username
+users = dict() #If a user comes back online with the session key
+users_online = dict() # Keep track of the list of currently chatting users
+
 
 #add any words that will be filtered
 with open("Profanitylists/Profanity_SE.txt", "r") as file:
@@ -30,72 +34,125 @@ profanity.load_words(words)
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 app.use_x_sendfile = False
-socketio = SocketIO(app)
+socketio = SocketIO(app,pingTimeout=10, pingInterval=5)
 
 messages = []
 
-#add any words that will be filtered 
+def logged_in():
+    if(("id" in session) and ("username" in session)):
+        if(session["id"] in users.keys()):
+            return True
+    return False
 
 @app.route("/")
 def home():
     #Om man redan är inloggad
-    if "username" in session:
+    if logged_in():
         return redirect("/chat")
-        
+    
+    #Setup a id for the user and store it in the browser
+    session["id"] = secrets.token_urlsafe(16) 
+    
     return render_template("login.html")
+    
 
 @socketio.on("message")
-def handle_message(data):
-    username = data["username"]
-    message = data["message"]
+def handle_message(message):
 
     # Check if the user has sent too many messages too quickly
     now = time.monotonic()
-    time_since_last_message = now - last_message_time[username]
+    time_since_last_message = now - last_message_time[session["id"]]
     if time_since_last_message < 1 and username != "admin":
         # Reject the message
         return
 
     # Update the last message time for the user
-    last_message_time[username] = now
+    last_message_time[session["id"]] = now
 
     #prevent html injections
-    data["username"] = data["username"].replace("<", "&lt;")
-    data["username"] = data["username"].replace(">", "&gt;")
-    data["message"] = data["message"].replace("<", "&lt;")
-    data["message"] = data["message"].replace(">", "&gt;")
-    data["message"] = profanity.censor(data["message"])
-    data["username"] = profanity.censor(data["username"])
+    sanitized_message = message.replace("<", "&lt;")
+    sanitized_message = message.replace(">", "&gt;")
+    
+    #prevent any badwords
+    safe_message = profanity.censor(sanitized_message)
 
+    data = {"username": users[session["id"]], "message": safe_message}
     messages.append(data) #Så dem som ansluter senare kan se alla gammla meddelanden
     emit("new_message", data, broadcast=True) #Meddela att ett nytt meddelande har skickats till alla (broadcast)
 
     # Update the list of currently chatting users
-    if username not in users:
-        users.add(username)
-        emit("all_users", list(users), broadcast=True)
+    #if request.id not in users.keys():
+        #users[request.id] = data["username"]
+        #emit("all_users", list(users), broadcast=True)
 
 @socketio.on("get_users")
 def handle_get_users():
     # Emit the list of currently chatting users to the client that requested it
-    emit("all_users", list(users))
-
+    tmp = []
+    for session_id,username in users.items():
+        if session_id in users_online.values(): 
+            tmp.append(username)
+    emit("all_users", list(tmp))
+    
 @app.route("/chat", methods=["POST", "GET"])
 def chat():
 
-    #print(request.form)
     if request.method == 'POST':
     
-        #Om någon nyss loggat in
-        if("username" in request.form):
-            session['username'] = request.form['username']
+        #If someone requested to log in
+        if "username" in request.form:
+                #prevent html injections   
+                sanitized_username = request.form['username'].replace("<", "&lt;")
+                sanitized_username = request.form['username'].replace(">", "&gt;")
+                
+                #prevent any badwords
+                safe_username = profanity.censor(sanitized_username)
+                
+                #store the username in the clients browser (session)
+                session['username'] = safe_username
+                
+                #tell others connected to the chat about the new user that just connected
+                socketio.emit("new_connect", f"{safe_username} connected to the chat!", broadcast=True)
+                
+                #add the user to the server
+                users[session["id"]] = safe_username 
+                socketio.emit("all_users", list(users.values()))
+                
+                return render_template("chat.html", username=session['username'],messages=messages)
+                
+    #If you are correctly logged in
+    if logged_in():
+        return render_template("chat.html", username=session['username'],messages=messages)
+            
+    #If someone tried to access chat but are not even logged in properly, start from beginning again
+    return home()
 
-            username = profanity.censor(session['username'])
-            socketio.emit("new_connect", f"{username} connected to the chat!", broadcast=True)
-            users.add(username)
-    
-    return render_template("chat.html", username=session['username'],messages=messages)
-    
+@socketio.on('connect')
+def handle_connect(): 
+    print("A user connected!")
+    if logged_in:
+        users_online[request.sid] = session["id"] #keep track of the current socket connection for this user
+
+@socketio.on('disconnect')
+def handle_disconnect():
+    try:
+        sid = users_online[request.sid] #Get the session id for the user that disconnected (inorder to retrieve the username)
+    except:
+        pass
+    else:
+        users_online.pop(request.sid)
+        username = users[sid] 
+        # Emit a message to all users to notify them of the disconnection
+        emit("new_disconnect", f"{username} disconnected from the chat!", broadcast=True)
+        # Also update the currently chatting users
+        
+        tmp = []
+        for session_id,username in users.items():
+            if session_id in users_online.values(): 
+                tmp.append(username)
+                
+        print(tmp)
+        socketio.emit("all_users", list(tmp))
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
