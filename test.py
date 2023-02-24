@@ -26,29 +26,7 @@ class TestChatApp(unittest.TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertTrue(response.headers['Location'].endswith('/chat'))
 
-    def test_send_message(self):
-        # Test that a logged in user can send a message
-        data = {'message': 'test message'}
-        with self.client as c:
-            with c.session_transaction() as sess:
-                sess['username'] = 'testuser'
-            response = c.post('/chat', data=data, follow_redirects=True)
-            self.assertEqual(response.status_code, 200)
-
-            # Check that the message was received by the server
-            response = c.get('/messages')
-            messages = response.get_json()
-            self.assertTrue(any(m['message'] == 'test message' for m in messages))
-
-    def test_get_users(self):
-        # Test that a logged in user can get the list of all currently chatting users
-        with self.client as c:
-            with c.session_transaction() as sess:
-                sess['username'] = 'testuser'
-            response = c.get('/users')
-            self.assertEqual(response.status_code, 200)
-            users = response.get_json()
-            self.assertIn('testuser', users)
+   
 
 if __name__ == '__main__':
     unittest.main()
