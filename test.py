@@ -29,6 +29,11 @@ class TestChatApp(unittest.TestCase):
     def tes_empty_password(self): 
         response = self.client.post('/login', data = {'username': 'testuser', 'passworde': ''})
         self.assertEqual(response.status_code, 404)
+    
+    #Testing that user can not log in with an invalid username
+    def tet_invalid_username(self): 
+        response = self.client.post('/login', data={'username': 'invalid', 'password': 'password'})
+        self.assertEqual(response.status_code, 401)
 
 if __name__ == '__main__':
     unittest.main()
