@@ -34,6 +34,24 @@ class TestChatApp(unittest.TestCase):
     def tet_invalid_username(self): 
         response = self.client.post('/login', data={'username': 'invalid', 'password': 'password'})
         self.assertEqual(response.status_code, 401)
+    
+    #Testing that a user can't use invalied password
+    #def test_invalid_password(self):
+        #response = self.client.post('/login', data={'username': 'testuser', 'password': 'invalid'})
+        #self.assertEqual(response.status_code, 401)
+    
+    #testing the maximam size of text a user can send. 
+    #def test_maxsize_message(self): 
+       # with self.client.session_transaction() as session: 
+            #session['username'] = 'testuser'
+        
+        #max_message_length = 1000 
+        #message = 'a' * max_message_length
+        #response = self.client.post('/send_message', data={'message':message})
+        #self.assertEqual(response.status_code,200)
+    #chck that the message was added to the chat history
+        #response = self.client.get('/message')
+        #self.assertIn(message.encode(), response.data)
 
 if __name__ == '__main__':
     unittest.main()
