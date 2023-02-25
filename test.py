@@ -19,8 +19,16 @@ class TestChatApp(unittest.TestCase):
             session['username'] = 'testuser'
         response = self.client.get('/chat')
         self.assertEqual(response.status_code, 200)
-
-   
+    
+    #this will test that users can't login with an empty username
+    def test_empty_username(self):
+        response = self.client.post('/login',data={'username': '', 'password': 'password'})
+        self.assertEqual(response.status, 400)
+    
+    # Testing that user can't login with empty passeword
+    def tes_empty_password(self): 
+        response = self.client.post('/login', data = {'username': 'testuser', 'passworde': ''})
+        self.assertEqual(response.status_code, 400)
 
 if __name__ == '__main__':
     unittest.main()
