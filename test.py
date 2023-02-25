@@ -34,6 +34,22 @@ class TestChatApp(unittest.TestCase):
     def tet_invalid_username(self): 
         response = self.client.post('/login', data={'username': 'invalid', 'password': 'password'})
         self.assertEqual(response.status_code, 401)
+
+  #Testing that the user can log in successfully
+    def test_login_success(self):
+        response = self.client.post('/login', data={'username': 'Nasim'})
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('username', session)
+        self.assertEqual(session['username'], 'Nasim')
+
+
+   #Testing that the server works correctly and it is running on the correct port
+    def test_server_start(self):
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Chat App', response.data)
+        self.assertIn(b'Username', response.data)
+        self.assertEqual(app.config['SERVER_NAME'], 'localhost:500')
     
     #Testing that a user can't use invalied password
     #def test_invalid_password(self):
