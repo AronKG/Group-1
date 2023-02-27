@@ -49,7 +49,7 @@ class TestChatApp(unittest.TestCase):
     
     def test_user_connected_not_logged_in(self):
         self.logged_in = False
-        self.handle_connect(self.logged_in, self.request, self.session, self.users_online)
+        handle_connect(self.logged_in, self.request, self.session, self.users_online)
         self.assertNotIn(self.request.sid, self.users_online)
   
     #Testing that a user can't use invalied password
