@@ -1,6 +1,7 @@
 import unittest
 import tempfile
-from server import app
+from server import app, profanity, socketio, users, messages
+
 
 class TestChatApp(unittest.TestCase):
 
@@ -34,6 +35,24 @@ class TestChatApp(unittest.TestCase):
     def tet_invalid_username(self): 
         response = self.client.post('/login', data={'username': 'invalid', 'password': 'password'})
         self.assertEqual(response.status_code, 401)
+
+      
+
+    #Testing that a user can log in successfully by providing a username,
+    def test_login_success(self):
+        with self.client as c:
+            with c.session_transaction() as session:
+                session['id'] = '1234'
+            resp = c.post('/chat', data={'username': 'testuser'})
+            self.assertIn(b'testuser', resp.data)
+    
+    def test_rate_limit(self):
+        self.client.post('/login', data=dict(username='valid_user'))
+        for i in range(11):
+            response = self.client.post('/send_message', data=dict(message='Message {}'.format(i)))
+        self.assertEqual(response.status_code, 404)
+
+
 
  
     #Testing that a user can't use invalied password
