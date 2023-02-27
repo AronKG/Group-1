@@ -4,7 +4,7 @@ import time
 import os
 import random
 import argparse
-from profanity import profanity
+from pofanity import profanity
 from collections import defaultdict
 import secrets
 
