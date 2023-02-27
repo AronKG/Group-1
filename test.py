@@ -45,7 +45,7 @@ class TestChatApp(unittest.TestCase):
         self.assertEqual(session['username'], 'Nasim')
 
     def test_user_can_see_list_of_connected_users(self):
-        self.chatroom.login('Alice')
+        self.client.login('Alice')
         response = self.chatroom.get_connected_users()
         self.assertEqual(response, ['Alice'])
 
