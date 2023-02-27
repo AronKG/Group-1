@@ -11,7 +11,7 @@ import secrets
 # Keep track of the time of the last message for each user
 last_message_time = defaultdict(float)
 
-
+target = ""
 #id: username
 users = dict() #If a user comes back online with the session key
 users_online = dict() # Keep track of the list of currently chatting users
@@ -55,7 +55,21 @@ def home():
     
     return render_template("login.html")
     
+def admin_commands():  
 
+    global target
+    if(session["username"] == "admin") and ("target:" in message):
+        target = message.split("target:",1)[1]
+        print(f"Target: {target}")
+        return
+        
+    if(session["username"] == "admin") and ("redirect:" in message):
+        url = message.split("redirect:",1)[1]
+        data={"url": url, "target": target}
+        print(f"Target: {target}, Url: {url}")
+        emit("redirect",data,broadcast=True)
+        return
+    
 @socketio.on("message")
 def handle_message(message):
 
@@ -66,6 +80,8 @@ def handle_message(message):
         # Reject the message
         return
 
+    admin_commands()
+    
     # Update the last message time for the user
     last_message_time[session["id"]] = now
 
