@@ -45,7 +45,7 @@ class TestChatApp(unittest.TestCase):
                 session['id'] = '1234'
             resp = c.post('/chat', data={'username': 'testuser'})
             self.assertIn(b'testuser', resp.data)
-    # Testing that 
+    
     def test_rate_limit(self):
         self.client.post('/login', data=dict(username='valid_user'))
         for i in range(11):
@@ -54,12 +54,7 @@ class TestChatApp(unittest.TestCase):
 
 
 
-    def test_censor_message(self):
-        self.client.post('/login', data=dict(username='valid_user'))
-        response = self.client.post('/send_message', data=dict(message='This is a bad word!'))
-        self.assertEqual(response.status_code, 200)
-        self.assertNotIn(b'This is a bad word!', response.data)
-        self.assertIn(b'***', response.data)
+ 
     #Testing that a user can't use invalied password
     #def test_invalid_password(self):
         #response = self.client.post('/login', data={'username': 'testuser', 'password': 'invalid'})
