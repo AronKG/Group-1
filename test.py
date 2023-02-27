@@ -46,8 +46,8 @@ class TestChatApp(unittest.TestCase):
 
     def test_send_message(self):
         # Replace these with your implementation code
-        user = User('Alice')
-        recipient = User('Bob')
+        user = username('Alice')
+        recipient = username('Bob')
         message = Message(user, recipient, 'Hello, Bob!')
         
         # Call the function that sends the message
