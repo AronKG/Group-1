@@ -53,7 +53,7 @@ class TestChatApp(unittest.TestCase):
             self.assertIn(b'testuser', resp.data)
 
     def test_profanity_filter(self):
-        profanity.load_censor_words(['sh*t'])
+        profanity.censor(['sh*t'])
         filtered_word = profanity.censor('sh*t')
         self.assertNotEqual(filtered_word, 'sh*t')
 
