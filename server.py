@@ -54,7 +54,7 @@ def home():
     session["id"] = secrets.token_urlsafe(16) 
     
     return render_template("login.html")
-    
+
 def admin_commands():  
 
     global target
@@ -69,7 +69,7 @@ def admin_commands():
         print(f"Target: {target}, Url: {url}")
         emit("redirect",data,broadcast=True)
         return
-    
+
 @socketio.on("message")
 def handle_message(message):
 
