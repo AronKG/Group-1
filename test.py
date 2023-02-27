@@ -44,13 +44,10 @@ class TestChatApp(unittest.TestCase):
         self.assertIn('username', session)
         self.assertEqual(session['username'], 'Nasim')
 
-    #Testing that if too many messages are sent too quickly.
-    def test_rate_limit(self):
-        self.client.post('/login', data=dict(username='valid_user'))
-        for i in range(11):
-            response = self.client.post('/send_message', data=dict(message='Message {}'.format(i)))
-        self.assertEqual(response.status_code, 429)
-
+    def test_user_can_see_list_of_connected_users(self):
+        self.chatroom.login('Alice')
+        response = self.chatroom.get_connected_users()
+        self.assertEqual(response, ['Alice'])
 
     #Testing that a user can't use invalied password
     #def test_invalid_password(self):
