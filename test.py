@@ -47,7 +47,7 @@ class TestChatApp(unittest.TestCase):
             self.assertIn(b'testuser', resp.data)
     
     def test_chat_route_not_logged_in(self):
-        response = self.app.get('/chat')
+        response = self.client.get('/chat')
         self.assertRedirects(response, '/')
     
     #Testing that a user can't use invalied password
