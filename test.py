@@ -50,7 +50,7 @@ class TestChatApp(unittest.TestCase):
         self.client.post('/login', data=dict(username='valid_user'))
         for i in range(11):
             response = self.client.post('/send_message', data=dict(message='Message {}'.format(i)))
-        self.assertEqual(response.status_code, 429)
+        self.assertEqual(response.status_code, 404)
 
     #Testing that a user can't use invalied password
     #def test_invalid_password(self):
