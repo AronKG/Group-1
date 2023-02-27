@@ -1,6 +1,6 @@
 import unittest
 import tempfile
-from server import app, profanity
+from server import app, profanitylists
 
 
 class TestChatApp(unittest.TestCase):
