@@ -44,10 +44,20 @@ class TestChatApp(unittest.TestCase):
         self.assertIn('username', session)
         self.assertEqual(session['username'], 'Nasim')
 
-    def test_user_can_disconnect_from_chat(self):
-        self.client.logged_in('Nasim')
-        response = self.client.disconnect()
-        self.assertEqual(response, 'disconnected')
+    def test_send_message(self):
+        # Replace these with your implementation code
+        user = User('Alice')
+        recipient = User('Bob')
+        message = Message(user, recipient, 'Hello, Bob!')
+        
+        # Call the function that sends the message
+        send_result = handle_message(message)
+        
+        # Assert that the function returns True to indicate success
+        self.assertTrue(send_result)
+        
+        # Assert that the recipient received the message
+        self.assertEqual(recipient.get_messages(), ['Hello, Bob!'])
 
     #Testing that a user can't use invalied password
     #def test_invalid_password(self):
