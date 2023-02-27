@@ -45,8 +45,8 @@ class TestChatApp(unittest.TestCase):
         self.assertEqual(session['username'], 'Nasim')
 
     def test_user_can_disconnect_from_chat(self):
-        self.client.logged_in('Alice')
-        response = self.chatroom.disconnect()
+        self.client.logged_in('Nasim')
+        response = self.client.disconnect()
         self.assertEqual(response, 'disconnected')
 
     #Testing that a user can't use invalied password
