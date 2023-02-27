@@ -44,10 +44,10 @@ class TestChatApp(unittest.TestCase):
         self.assertIn('username', session)
         self.assertEqual(session['username'], 'Nasim')
 
-    def test_user_can_see_list_of_connected_users(self):
-        self.client.login('Alice')
-        response = self.chatroom.get_connected_users()
-        self.assertEqual(response, ['Alice'])
+    def test_user_can_disconnect_from_chat(self):
+        self.client.logged_in('Alice')
+        response = self.chatroom.disconnect()
+        self.assertEqual(response, 'disconnected')
 
     #Testing that a user can't use invalied password
     #def test_invalid_password(self):
