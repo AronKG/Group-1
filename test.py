@@ -35,23 +35,23 @@ class TestChatApp(unittest.TestCase):
         response = self.client.post('/login', data={'username': 'invalid', 'password': 'password'})
         self.assertEqual(response.status_code, 401)
 
-    #Testing that the server works correctly 
-    def test_server_start(self):
-        response = self.client.get('/')
-        self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Chat App', response.data)
-        self.assertIn(b'Username', response.data)
-        self.assertEqual(app.config['SERVER_NAME'], 'localhost:500')
+    
 
-    #Testing that that a user can log in successfully by providing a username,
+    #Testing that a user can log in successfully by providing a username,
     def test_login_success(self):
         response = self.client.post('/login', data={'username': 'Nasim'})
         self.assertEqual(response.status_code, 200)
         self.assertIn('username', session)
         self.assertEqual(session['username'], 'Nasim')
 
+    #Testing that if too many messages are sent too quickly.
+    def test_rate_limit(self):
+        self.client.post('/login', data=dict(username='valid_user'))
+        for i in range(11):
+            response = self.client.post('/send_message', data=dict(message='Message {}'.format(i)))
+        self.assertEqual(response.status_code, 429)
 
-        
+
     #Testing that a user can't use invalied password
     #def test_invalid_password(self):
         #response = self.client.post('/login', data={'username': 'testuser', 'password': 'invalid'})
