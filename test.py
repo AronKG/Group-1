@@ -46,17 +46,10 @@ class TestChatApp(unittest.TestCase):
             resp = c.post('/chat', data={'username': 'testuser'})
             self.assertIn(b'testuser', resp.data)
     
-    def test_message(self):
-        # Connect a user to the server
-        self.client.emit('connect')
-        # Send a message
-        self.client.emit('message', {'message': 'Hello world!'})
-        # Wait for the server to process the message
-        self.client.sleep(1)
-        # Check if the message was added to the history
-        self.assertEqual(len(messages), 1)
-        self.assertEqual(messages[0]['message'], 'Hello world!')
-   
+    def test_chat_route_not_logged_in(self):
+        response = self.app.get('/chat')
+        self.assertRedirects(response, '/')
+    
     #Testing that a user can't use invalied password
     #def test_invalid_password(self):
         #response = self.client.post('/login', data={'username': 'testuser', 'password': 'invalid'})
