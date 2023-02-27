@@ -44,20 +44,12 @@ class TestChatApp(unittest.TestCase):
         self.assertIn('username', session)
         self.assertEqual(session['username'], 'Nasim')
 
-    def test_send_message(self):
-        # Replace these with your implementation code
-        user = username('Alice')
-        recipient = username('Bob')
-        message = Message(user, recipient, 'Hello, Bob!')
-        
-        # Call the function that sends the message
-        send_result = handle_message(message)
-        
-        # Assert that the function returns True to indicate success
-        self.assertTrue(send_result)
-        
-        # Assert that the recipient received the message
-        self.assertEqual(recipient.get_messages(), ['Hello, Bob!'])
+    def test_profanity_filter(self):
+        # Test with a profane message
+        message = "I hate Mondays, they are sh*t!"
+        profanity.load_censor_words(['sh*t'])
+        filtered_message = profanity.censor(message)
+        self.assertEqual(filtered_message, "I hate Mondays, they are ****!")
 
     #Testing that a user can't use invalied password
     #def test_invalid_password(self):
