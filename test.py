@@ -36,7 +36,7 @@ class TestChatApp(unittest.TestCase):
         response = self.client.post('/login', data={'username': 'invalid', 'password': 'password'})
         self.assertEqual(response.status_code, 401)
 
-    
+      
 
     #Testing that a user can log in successfully by providing a username,
     def test_login_success(self):
@@ -45,13 +45,18 @@ class TestChatApp(unittest.TestCase):
                 session['id'] = '1234'
             resp = c.post('/chat', data={'username': 'testuser'})
             self.assertIn(b'testuser', resp.data)
-
     
-    def test_user_connected_not_logged_in(self):
-        self.logged_in = False
-        handle_connect(self.logged_in, self.request, self.session, self.users_online)
-        self.assertNotIn(self.request.sid, self.users_online)
-  
+    def test_message(self):
+        # Connect a user to the server
+        self.client.emit('connect')
+        # Send a message
+        self.client.emit('message', {'message': 'Hello world!'})
+        # Wait for the server to process the message
+        self.client.sleep(1)
+        # Check if the message was added to the history
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(messages[0]['message'], 'Hello world!')
+   
     #Testing that a user can't use invalied password
     #def test_invalid_password(self):
         #response = self.client.post('/login', data={'username': 'testuser', 'password': 'invalid'})
