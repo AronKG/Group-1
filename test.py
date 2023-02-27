@@ -46,10 +46,13 @@ class TestChatApp(unittest.TestCase):
             resp = c.post('/chat', data={'username': 'testuser'})
             self.assertIn(b'testuser', resp.data)
     
-    def test_chat_route_not_logged_in(self):
+    def test_chat_route_logged_in(self):
+        with self.client.session_transaction() as session:
+            session['id'] = 'test_id'
+            session['username'] = 'test_user'
+
         response = self.client.get('/chat')
-        self.assertRedirects(response, '/')
-    
+        self.assertEqual(response.status_code, 200)
     #Testing that a user can't use invalied password
     #def test_invalid_password(self):
         #response = self.client.post('/login', data={'username': 'testuser', 'password': 'invalid'})
