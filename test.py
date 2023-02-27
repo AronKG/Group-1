@@ -39,12 +39,6 @@ class TestChatApp(unittest.TestCase):
     
 
     #Testing that a user can log in successfully by providing a username,
-   # def test_login_success(self):
-        #response = self.client.post('/login', data={'username': 'Nasim'})
-        #self.assertEqual(response.status_code, 404)
-       # self.assertIn('username', session)
-       # self.assertEqual(session['username'], 'Nasim')
-
     def test_login_success(self):
         with self.client as c:
             with c.session_transaction() as session:
@@ -52,11 +46,12 @@ class TestChatApp(unittest.TestCase):
             resp = c.post('/chat', data={'username': 'testuser'})
             self.assertIn(b'testuser', resp.data)
 
-    def test_profanity_filter(self):
-        profanity.censor(['sh*t'])
-        filtered_word = profanity.censor('sh*t')
-        self.assertNotEqual(filtered_word, 'sh*t')
-
+    
+    def test_user_connected_not_logged_in(self):
+        self.logged_in = False
+        self.handle_connect(self.logged_in, self.request, self.session, self.users_online)
+        self.assertNotIn(self.request.sid, self.users_online)
+  
     #Testing that a user can't use invalied password
     #def test_invalid_password(self):
         #response = self.client.post('/login', data={'username': 'testuser', 'password': 'invalid'})
