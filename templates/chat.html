@@ -144,7 +144,6 @@ body {
 		
 		
 		<script>
-		
 			var username = "{{username}}";
 			function updateScroll()
 			{
@@ -180,7 +179,7 @@ body {
 				updateScroll();
 			  });
 			  socket.on("redirect", function(data) {
-				// Redirect
+				// Lägg till dem nya meddelandena
 				console.log(data)
 				if (data["target"] == username)
 				{
