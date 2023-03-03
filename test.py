@@ -1,6 +1,6 @@
 import unittest
 import tempfile
-from server import app, profanity, socketio, users, messages, SpellChecker
+from server import app, profanity, socketio, users, messages
 
 
 class TestChatApp(unittest.TestCase):
