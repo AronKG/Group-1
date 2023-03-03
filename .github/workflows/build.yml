@@ -17,7 +17,6 @@ jobs:
      - run: pip install spellchecker
      - run: pip install -U spellchecker
      - run: pip install pyspellchecker
-     #- run: pip install indexer
     # - run: python --version
      #- run: ls # temporary debug
      #- run: python server.py --host 127.0.0.1 --port 5000 --test 1
