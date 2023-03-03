@@ -8,6 +8,7 @@ from profanity import profanity
 from collections import defaultdict
 import secrets
 from spellchecker import SpellChecker
+from indexer import DictionaryIndex
 
 # Keep track of the time of the last message for each user
 last_message_time = defaultdict(float)
