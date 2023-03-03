@@ -15,7 +15,7 @@ setup(
         ]
     },
     classifiers=[
-        'Development Status :: v0.1.1',
+        'Development Status :: 2 - Pre-Alpha',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.9',
         'License :: OSI Approved :: MIT License',
