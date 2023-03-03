@@ -16,6 +16,7 @@ jobs:
      - run: pip install profanity
      - run: pip install spellchecker
      - run: pip install -U spellchecker
+     - run: pip install pyspellchecker
      #- run: pip install indexer
     # - run: python --version
      #- run: ls # temporary debug
