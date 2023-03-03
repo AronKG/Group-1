@@ -45,7 +45,7 @@ class TestChatApp(unittest.TestCase):
                 session['id'] = '1234'
             resp = c.post('/chat', data={'username': 'testuser'})
             self.assertIn(b'testuser', resp.data)
-    
+     
     def test_rate_limit(self):
         self.client.post('/login', data=dict(username='valid_user'))
         for i in range(11):
