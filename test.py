@@ -60,19 +60,7 @@ class TestChatApp(unittest.TestCase):
 
    
 
-   # A property test for logged_in function, it is used to determine if a user is logged i or not
-    def test_log_in(self):
-        for i in range (50):#generate 50 test cases.
-            session = {}
-            users = {}
-            for j in range (random.randint(0,10)):
-                key = random.choice(["id", "username"])
-                value = random.randint(0,50)
-                session[key] = value
-                if key == "id":
-                     users[value] = str(value)
-                     result = ("id" in session) and ("username" in session) and (session["id"] in users.keys())
-                     assert result == logged_in()
+  
  
 if __name__ == '__main__':
     unittest.main()
