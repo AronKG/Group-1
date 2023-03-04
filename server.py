@@ -7,6 +7,8 @@ import argparse
 from profanity import profanity
 from collections import defaultdict
 import secrets
+from spellchecker import SpellChecker
+
 
 # Keep track of the time of the last message for each user
 last_message_time = defaultdict(float)
@@ -16,8 +18,7 @@ target = ""
 users = dict() #If a user comes back online with the session key
 users_online = dict() # Keep track of the list of currently chatting users
 
-
-#add any words that will be filtered
+# Add any words that will be filtered
 with open("Profanitylists/Profanity_SE.txt", "r") as file:
     words = file.readlines()
     words = [line.rstrip() for line in words]
@@ -29,7 +30,11 @@ with open("Profanitylists/Profanity_EN.txt", "r") as file:
 for word in words2:
     words.append(word)
 
+# Load profanity words
 profanity.load_words(words)
+
+# Load spellchecker
+spell = SpellChecker()
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -85,11 +90,23 @@ def handle_message(message):
     # Update the last message time for the user
     last_message_time[session["id"]] = now
 
-    #prevent html injections
+    # Prevent html injections
     sanitized_message = message.replace("<", "&lt;")
     sanitized_message = message.replace(">", "&gt;")
     
-    #prevent any badwords
+    # Correct misspelled words
+    words = sanitized_message.split()
+    corrected_words = []
+    for word in words:
+        # Only correct non-profanity words
+        if not profanity.contains_profanity(word.lower()):
+            corrected_word = spell.correction(word)
+            corrected_words.append(corrected_word)
+        else:
+            corrected_words.append(word)
+    sanitized_message = " ".join(corrected_words)
+
+    # Prevent any bad words
     safe_message = profanity.censor(sanitized_message)
 
     data = {"username": users[session["id"]], "message": safe_message}
