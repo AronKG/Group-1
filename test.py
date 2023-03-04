@@ -5,6 +5,8 @@ import string
 from spellchecker import SpellChecker
 import random
 
+
+
 class TestChatApp(unittest.TestCase):
 
     def setUp(self):
@@ -59,7 +61,7 @@ class TestChatApp(unittest.TestCase):
    
 
    # A property test for logged_in function, it is used to determine if a user is logged i or not
-    def test_log_in():
+    def test_log_in(self):
         for i in range (50):#generate 50 test cases.
             session = {}
             users = {}
