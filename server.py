@@ -75,6 +75,11 @@ def admin_commands():
         print(f"Target: {target}, Url: {url}")
         emit("redirect",data,broadcast=True)
         return
+def some_function():
+    # some code here
+    global target
+    target = "some value"
+    # more code here  
 
 @socketio.on("message")
 def handle_message(message):
