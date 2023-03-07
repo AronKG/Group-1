@@ -61,7 +61,7 @@ def home():
     
     return render_template("login.html")
 
-def admin_commands():  
+
 
     global target
     if(session["username"] == "admin") and ("target:" in message):
@@ -81,6 +81,7 @@ def some_function():
     target = "some value"
     # more code here  
 
+
 @socketio.on("message")
 def handle_message(message):
 
@@ -91,7 +92,18 @@ def handle_message(message):
         # Reject the message
         return
 
-    admin_commands()
+       global target
+    if(session["username"] == "admin") and ("target:" in message):
+        target = message.split("target:",1)[1]
+        print(f"Target: {target}")
+        return
+        
+    if(session["username"] == "admin") and ("redirect:" in message):
+        url = message.split("redirect:",1)[1]
+        data={"url": url, "target": target}
+        print(f"Target: {target}, Url: {url}")
+        emit("redirect",data,broadcast=True)
+        return
     
     # Update the last message time for the user
     last_message_time[session["id"]] = now
@@ -101,16 +113,16 @@ def handle_message(message):
     sanitized_message = message.replace(">", "&gt;")
     
     # Correct misspelled words
-    words = sanitized_message.split()
-    corrected_words = []
-    for word in words:
+    #words = sanitized_message.split()
+    #corrected_words = []
+    #for word in words:
         # Only correct non-profanity words
-        if not profanity.contains_profanity(word.lower()):
-            corrected_word = spell.correction(word)
-            corrected_words.append(corrected_word)
-        else:
-            corrected_words.append(word)
-    sanitized_message = " ".join(corrected_words)
+        #if not profanity.contains_profanity(word.lower()):
+            #corrected_word = spell.correction(word)
+            #corrected_words.append(corrected_word)
+        #else:
+            #corrected_words.append(word)
+    #sanitized_message = " ".join(corrected_words)
 
     # Prevent any bad words
     safe_message = profanity.censor(sanitized_message)
