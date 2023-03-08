@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask,flash, render_template, request, session, redirect
 from flask_socketio import SocketIO, emit
 import time
 import os
@@ -8,6 +8,7 @@ from profanity import profanity
 from collections import defaultdict
 import secrets
 from spellchecker import SpellChecker
+
 
 
 # Keep track of the time of the last message for each user
@@ -62,10 +63,9 @@ def home():
 
 
 
-
 @socketio.on("message")
 def handle_message(message):
-    global target
+
     # Check if the user has sent too many messages too quickly
     now = time.monotonic()
     time_since_last_message = now - last_message_time[session["id"]]
@@ -73,18 +73,6 @@ def handle_message(message):
         # Reject the message
         return
 
-       
-    if(session["username"] == "admin") and ("target:" in message):
-        target = message.split("target:",1)[1]
-        print(f"Target: {target}")
-        return
-        
-    if(session["username"] == "admin") and ("redirect:" in message):
-        url = message.split("redirect:",1)[1]
-        data={"url": url, "target": target}
-        print(f"Target: {target}, Url: {url}")
-        emit("redirect",data,broadcast=True)
-        return
     
     # Update the last message time for the user
     last_message_time[session["id"]] = now
@@ -133,25 +121,33 @@ def chat():
     
         #If someone requested to log in
         if "username" in request.form:
-                #prevent html injections   
-                sanitized_username = request.form['username'].replace("<", "&lt;")
-                sanitized_username = request.form['username'].replace(">", "&gt;")
                 
-                #prevent any badwords
-                safe_username = profanity.censor(sanitized_username)
-                
-                #store the username in the clients browser (session)
-                session['username'] = safe_username
-                
-                #tell others connected to the chat about the new user that just connected
-                socketio.emit("new_connect", f"{safe_username} connected to the chat!", broadcast=True)
-                
-                #add the user to the server
-                users[session["id"]] = safe_username 
-                socketio.emit("all_users", list(users.values()))
-                
-                return render_template("chat.html", username=session['username'],messages=messages)
-                
+                #get the usernam from the form data
+                username = request.form['username'].strip()
+
+                #check if the username is not empty 
+                if username:
+
+                    #prevent html injections   
+                    sanitized_username = request.form['username'].replace("<", "&lt;")
+                    sanitized_username = request.form['username'].replace(">", "&gt;")
+                    
+                    #prevent any badwords
+                    safe_username = profanity.censor(sanitized_username)
+                    
+                    #store the username in the clients browser (session)
+                    session['username'] = safe_username
+                    
+                    #tell others connected to the chat about the new user that just connected
+                    socketio.emit("new_connect", f"{safe_username} connected to the chat!", broadcast=True)
+                    
+                    #add the user to the server
+                    users[session["id"]] = safe_username 
+                    socketio.emit("all_users", list(users.values()))
+                    
+                    return render_template("chat.html", username=session['username'],messages=messages)
+                flash('Please enter your name')
+
     #If you are correctly logged in
     if logged_in():
         return render_template("chat.html", username=session['username'],messages=messages)
