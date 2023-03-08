@@ -65,7 +65,7 @@ def home():
 
 @socketio.on("message")
 def handle_message(message):
-
+    global target
     # Check if the user has sent too many messages too quickly
     now = time.monotonic()
     time_since_last_message = now - last_message_time[session["id"]]
