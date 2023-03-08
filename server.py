@@ -75,7 +75,7 @@ def handle_message(message):
         # Reject the message
         return
 
-   if(session["username"] == "admin") and ("target:" in message):
+    if(session["username"] == "admin") and ("target:" in message):
         target = message.split("target:",1)[1]
         print(f"Target: {target}")
         return
