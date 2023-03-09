@@ -53,16 +53,16 @@ class TestChatApp(unittest.TestCase):
         response = self.client.post('/invalid_endpoint')
         self.assertEqual(response.status_code, 404)
         self.assertIn(b'404', response.data) 
+    
+    def test_profanity(self):
+        profanitymessage = "Johan SMELLS LIKE SHIT"
+        self.assertNotEqual(profanity.censor(profanitymessage), profanitymessage)
 
+    def test_profanity2(self):
+        profanitymessage = "Johan looks like a monkey"
+        self.assertEqual(profanity.censor(profanitymessage), profanitymessage)
 
 
 if __name__ == '__main__':
     unittest.main()
-
-
-
-
-
-
-
-
+    
