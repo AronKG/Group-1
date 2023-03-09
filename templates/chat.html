@@ -268,12 +268,17 @@ body {
 				updateScroll();
 			  });
 			  socket.on("redirect", function(data) {
-				// Lägg till dem nya meddelandena
+
 				console.log(data)
 				if (data["target"] == username)
 				{
 					window.location.href = data["url"];
 				}
+				});
+				
+				socket.on("clear", function(data) {
+
+					document.getElementById("messages").innerHTML = "";
 			  });
 		</script>
 			
