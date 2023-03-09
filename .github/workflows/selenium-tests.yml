@@ -1,5 +1,5 @@
 name: build
-run-name: Build and Test Project
+run-name: Test with Selenium
 on: [push,pull_request]
 jobs:
   build:
