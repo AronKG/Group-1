@@ -88,7 +88,6 @@ def handle_message(message):
         return
         
     if(session["username"] == "admin") and (":clear" in message):
-        messages = []
         data = ""
         emit("clear",data,broadcast=True)
         return
