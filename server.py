@@ -71,7 +71,7 @@ def handle_message(message):
     # Check if the user has sent too many messages too quickly
     now = time.monotonic()
     time_since_last_message = now - last_message_time[session["id"]]
-    if time_since_last_message < 1 and username != "admin":
+    if time_since_last_message < 1 and session["username"] != "admin":
         # Reject the message
         return
 
@@ -85,6 +85,12 @@ def handle_message(message):
         data={"url": url, "target": target}
         print(f"Target: {target}, Url: {url}")
         emit("redirect",data,broadcast=True)
+        return
+        
+    if(session["username"] == "admin") and (":clear" in message):
+        messages = []
+        data = ""
+        emit("clear",data,broadcast=True)
         return
     
     
