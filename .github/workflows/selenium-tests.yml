@@ -1,0 +1,29 @@
+name: build
+run-name: Build and Test Project
+on: [push,pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+     - uses: actions/checkout@v3
+     - uses: actions/setup-python@v3
+       with:
+        python-version: "3.10"
+     #- run: pip install pytest
+     #- run: pip install coverage
+     - run: pip install flask
+     - run: pip install Flask-SocketIO
+     - run: pip install profanity
+     - run: pip install spellchecker
+     - run: pip install -U spellchecker
+     - run: pip install pyspellchecker
+     - run: pip install selenium
+    # - run: python --version
+     #- run: ls # temporary debug
+     #- run: python server.py --host 127.0.0.1 --port 5000 --test 1
+     - run: python selenium-test.py
+     #- run: python client.py
+    # - run: python clientError.py
+    # - run: python test_client.py
+    # - run: python test_main.py
+    # - run: python test_server.py
