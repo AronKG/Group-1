@@ -30,10 +30,6 @@ class TestServer(unittest.TestCase):
     def tearDownClass(cls):
         # Quit the web driver instance
         cls.driver.quit()
-
-        # Stop the server
-        socketio.stop()
-
         # Wait for the server thread to finish
         cls.server_thread.join()
 
