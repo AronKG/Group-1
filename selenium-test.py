@@ -20,7 +20,7 @@ class TestServer(unittest.TestCase):
         cls.driver = webdriver.Chrome(options=options)
 
         # Start the server on a separate thread
-        cls.server_thread = threading.Thread(target=socketio.run, args=(app,), kwargs={'debug': True, 'use_reloader':False, 'host': '0.0.0.0', 'port': 5000})
+        cls.server_thread = threading.Thread(target=socketio.run, args=(app,), kwargs={'debug': True, 'allow_unsafe_werkzeug'=True, 'use_reloader':False, 'host': '0.0.0.0', 'port': 5000})
         cls.server_thread.start()
 
         # Wait for the server to start up
