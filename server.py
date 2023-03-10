@@ -37,7 +37,7 @@ profanity.load_words(words)
 # Load spellchecker
 spell = SpellChecker()
 
-app = Flask(__name__)
+app = Flask(__name__,static_url_path='/static')
 app.secret_key = os.urandom(24)
 app.use_x_sendfile = False
 socketio = SocketIO(app, pingTimeout=10, pingInterval=5)
@@ -62,12 +62,7 @@ def home():
     session["id"] = secrets.token_urlsafe(16)
 
     return render_template("login.html")
-
-
-
-
     
-
 @socketio.on("message")
 def handle_message(message):
 
@@ -99,17 +94,6 @@ def handle_message(message):
     sanitized_message = message.replace("<", "&lt;")
     sanitized_message = message.replace(">", "&gt;")
 
-    # Correct misspelled words
-    # words = sanitized_message.split()
-    # corrected_words = []
-    # for word in words:
-    # Only correct non-profanity words
-    # if not profanity.contains_profanity(word.lower()):
-    # corrected_word = spell.correction(word)
-    # corrected_words.append(corrected_word)
-    # else:
-    # corrected_words.append(word)
-    # sanitized_message = " ".join(corrected_words)
 
     # Prevent any bad words
     safe_message = profanity.censor(sanitized_message)
@@ -120,10 +104,6 @@ def handle_message(message):
         "new_message", data, broadcast=True
     )  # Meddela att ett nytt meddelande har skickats till alla (broadcast)
 
-    # Update the list of currently chatting users
-    # if request.id not in users.keys():
-    # users[request.id] = data["username"]
-    # emit("all_users", list(users), broadcast=True)
 
 
 @socketio.on("get_users")
@@ -291,7 +271,6 @@ def handle_private_message(data):
     sanitized_message = message.replace("<", "&lt;")
     sanitized_message = message.replace(">", "&gt;")
 
-
     # Prevent any bad words
     safe_message = profanity.censor(sanitized_message)
 
@@ -303,13 +282,6 @@ def handle_private_message(data):
     emit(
         "new_private_message", data, broadcast=True
     )  # Meddela att ett nytt meddelande har skickats till alla (broadcast)
-
-    # Update the list of currently chatting users
-    # if request.id not in users.keys():
-    # users[request.id] = data["username"]
-    # emit("all_users", list(users), broadcast=True)
-
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
