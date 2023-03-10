@@ -9,54 +9,8 @@
 
 body {
 }
-.chat-users {
-  position: absolute;
-  top: 50px; /* Adjust this value to align the box properly */
-  right: 0;
-  width: 200px;
-  height: 50%;
-  margin-right: 10px;
-  background-color: #4CAF50;
-  color: whitesmoke;
-  border: 1px solid #ccc;
-  box-shadow: 2px 2px 4px #ccc;
-  border-radius: 4px;
-  padding: 10px;
-  font-family: gagga;
-}
 
-      .chat-users h3 {
-        margin-top: 0;
-        font-size: 16px;
-      }
-
-      .chat-users ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-      }
-
-      .chat-users li {
-        margin-bottom: 5px;
-        font-size: 14px;
-        font-family: "Courier New";
-      }
-      
-      #privatechat
-      {
-        padding: 3px 3px;
-        background-color: #7EB09B;
-        margin-left: 10px;
-        size: 80%;
-        color: #fff;
-        border-radius: 4px;
-        border-color: #7EB09B;
-        cursor: pointer;
-        font-family: "Courier New";
-        font-size: 10px;
-      }
-
-      /* Add styles for the chat app */
+/* Add styles for the chat app */
 .chat-container {
   position: absolute; /* Add this line */
   display: flex;
@@ -151,14 +105,9 @@ body {
     width: 100%;
 	height: 80%;
 	margin-top: 30%;
-    margin-left: 0%;
-
-	
+    margin-left: 0%;	
   }
   
-    .chat-users li {
-    margin-left: 5px;
-  }
 		  
   body{
   margin: 0%;
@@ -170,33 +119,6 @@ body {
 	padding: 0px;
 	}
   
-  /* Adjust the position of the chat users box */
-  .chat-users {
-    position: static;
-    width: 50%;
-	height: 50px;
-	max-height: 90px;
-	margin: auto;
-    height: auto;
-	overflow-y: auto;
-
-  }
-  
-    .chat-users ul {
-    display: inline-block;
-	margin-left: 2%;
-	white-space:nowrap;
-	list-style: none;
-
-  }
-
-
-  /* Adjust the font size of the chat user list */
-  .chat-users li {
-    font-size: 12px;
-	display: inline;
-  }
-
   /* Adjust the font size and padding of the message input */
   .chat-input input {
     padding: 5px;
@@ -219,14 +141,9 @@ body {
     width: 100%;
 	height: 90%;
 	margin-top: 15%;
-    margin-left: 0%;
-	  
-	
+    margin-left: 0%;  
   }
   
-    .chat-users li {
-    margin-left: 5px;
-  }
 }	
 
     </style>
@@ -253,30 +170,29 @@ body {
 				var chatMessages = document.querySelector('.chat-messages');
 				chatMessages.scrollTop = chatMessages.scrollHeight;
 			}
-			//Hämta alla meddelande som har skickats hitills
-			var messages = {{ messages|tojson|safe }};
-				for (var i in messages)
-				{
-					document.getElementById("messages").innerHTML += '<div class="message"><span class="message-username">' + messages[i]["username"] + ':</span><span class ="message-sent">' + messages[i]["message"] + '<span></div>';
-				}
-				
-			//console.log(messages);
+
+            var messages = {{ messages|tojson|safe }};
+            for (var i in messages)
+            {
+                document.getElementById("messages").innerHTML += '<div class="message"><span class="message-username">' + messages[i]["username"] + ':</span><span class ="message-sent">' + messages[i]["message"] + '<span></div>';
+            }
+
 			updateScroll();
 		  
 		  
 		  //Hämta kontinuerligt nya meddelanden från servern 
 			var socket = io.connect("http://" + document.domain + ":" + location.port);
-			  socket.on("new_disconnect", function(message) {
+			  //socket.on("new_disconnect", function(message) {
 				// Någon loggade ut
-				document.getElementById("messages").innerHTML += '<div class="message" id="highlight-disconnect"><span class="message-username">' + message + '</span></div>';
-				updateScroll();
-			  });
-			  socket.on("new_connect", function(message) {
+				//document.getElementById("messages").innerHTML += '<div class="message" id="highlight-disconnect"><span class="message-username">' + message + '</span></div>';
+				//updateScroll();
+			 // });
+			  //socket.on("new_connect", function(message) {
 				// Någon anslöt
-				document.getElementById("messages").innerHTML += '<div class="message" id="highlight-connect"><span class="message-username">' + message + '</span></div>';
-				updateScroll();
-			  });
-			  socket.on("new_message", function(data) {
+				//document.getElementById("messages").innerHTML += '<div class="message" id="highlight-connect"><span class="message-username">' + message + '</span></div>';
+				//updateScroll();
+			  //});
+			  socket.on("new_private_message", function(data) {
 				// Lägg till dem nya meddelandena
 				document.getElementById("messages").innerHTML += '<div class="message"><span class="message-username">' + data["username"] + ':</span><span class ="message-sent">' + data["message"] + '<span></div>';
 				updateScroll();
@@ -297,54 +213,11 @@ body {
         <button id="send-button" type="submit">Send</button>
       </div>
 
-
-      
 	<script>
 	
 	// Emit a request to get all currently chatting users
 	socket.emit("get_users");
-  var username = "{{username}}";
-  function myFunction(user) {
-      window.location.href = '/'+user;
-    }
-
-
-    socket.on("request_private_chat", function(data) {
-      console.log(data);
-
-      if (data["recipent"] == username) {                                                                                                                           
-        document.getElementById("messages").innerHTML += '<div class="message" id="highlight-connect"><span class="message-username">' + data["requester"] + " wants to private chat " + "<a href =" + "/" + data["key"] + ">" + "click here" + "</a>" + '</span></div>';
-				updateScroll();
-      }
-    });
-
-  var henrikärbajs = 1;
-	// Receive the list of currently chatting users from the server
-  socket.on("all_users", function(users) {
-  var userList = document.querySelector(".chat-users ul");
-  userList.innerHTML = "";
-  for (var i in users) {
-    var user = document.createElement("li");
-    user.textContent = users[i];
-    var privateChatBtn = document.createElement("button");
-    privateChatBtn.textContent = "Private chat!";
-    privateChatBtn.id = "privatechat"; // add an id to the button
-    //Create a hidden attribute for the username  on the button
-    privateChatBtn.setAttribute("data-username", users[i]);
-
-    privateChatBtn.setAttribute('onclick', 'myFunction("' + users[i] + '")'); 
-
-   
-
-    privateChatBtn.id = "privatechat"; // add an id to the button
-    user.appendChild(privateChatBtn);
-    userList.appendChild(user);
-  }
-
-});
-    
-
-
+	var chatKey = "{{chatKey}}";
  	function preventHTML(message)
       {
         var newMessage = message;
@@ -366,16 +239,13 @@ body {
 	  document.getElementById("send-button").addEventListener("click", function(event) {
 		event.preventDefault();
 		var messageInput = document.getElementById("message-input").value;
-		socket.emit("message", preventHTML(messageInput));
+        data = {"message": preventHTML(messageInput), "chatKey": chatKey};
+		socket.emit("private_message", data);
 		document.getElementById("message-input").value = "";
 	  });
 	  
 	</script>	
     </div>
-	      <div class="chat-users">
-        <h3>Currently chatting:</h3>
-        <ul>
-        </ul>
-      </div>
+
   </body>
 </html>
