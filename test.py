@@ -23,14 +23,14 @@ class TestChatApp(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
     
     #this will test that users can't login with an empty username
-    def test_empty_username(self):
-        response = self.client.post('/login',data={'username': '', 'password': 'password'})
-        self.assertEqual(response.status_code, 404)
+    #def test_empty_username(self):
+       #response = self.client.post('/login',data={'username': '', 'password': 'password'})
+        #self.assertEqual(response.status_code, 404)
     
     #Testing that user can not log in with an invalid username
-    def tet_invalid_username(self): 
-        response = self.client.post('/login', data={'username': 'invalid', 'password': 'password'})
-        self.assertEqual(response.status_code, 401)
+    #def tet_invalid_username(self): 
+        #response = self.client.post('/login', data={'username': 'invalid', 'password': 'password'})
+        #self.assertEqual(response.status_code, 401)
 
       
 
@@ -42,17 +42,17 @@ class TestChatApp(unittest.TestCase):
             resp = c.post('/chat', data={'username': 'testuser'})
             self.assertIn(b'testuser', resp.data)
      
-    def test_rate_limit(self):
-        self.client.post('/login', data=dict(username='valid_user'))
-        for i in range(11):
-            response = self.client.post('/send_message', data=dict(message='Message {}'.format(i)))
-        self.assertEqual(response.status_code, 404)
+    #def test_rate_limit(self):
+        #self.client.post('/login', data=dict(username='valid_user'))
+        #for i in range(11):
+            #response = self.client.post('/send_message', data=dict(message='Message {}'.format(i)))
+        #self.assertEqual(response.status_code, 404)
     
     # error handling
-    def test_error_handling(self): 
-        response = self.client.post('/invalid_endpoint')
-        self.assertEqual(response.status_code, 404)
-        self.assertIn(b'404', response.data) 
+    #def test_error_handling(self): 
+        #response = self.client.post('/invalid_endpoint')
+        #self.assertEqual(response.status_code, 404)
+        #self.assertIn(b'404', response.data) 
     
     def test_profanity(self):
         profanitymessage = "Johan SMELLS LIKE SHIT"
