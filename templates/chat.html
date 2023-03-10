@@ -35,11 +35,7 @@
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
         //Hämta alla meddelande som har skickats hitills
-        var messages = {
-            {
-                messages | tojson | safe
-            }
-        };
+        var messages = {{messages | tojson | safe}};
         for (var i in messages) {
             document.getElementById("messages").innerHTML += '<div class="message"><span class="message-username">' + messages[i]["username"] + ':</span><span class ="message-sent">' + messages[i]["message"] + '<span></div>';
         }
