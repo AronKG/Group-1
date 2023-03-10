@@ -26,7 +26,6 @@ socket.on("redirect", function(data) {
 
 // Emit a request to get all currently chatting users
 socket.emit("get_users");
-var username = "{{username}}";
 
 function myFunction(user) {
     window.location.href = '/' + user;
