@@ -291,17 +291,6 @@ def handle_private_message(data):
     sanitized_message = message.replace("<", "&lt;")
     sanitized_message = message.replace(">", "&gt;")
 
-    # Correct misspelled words
-    # words = sanitized_message.split()
-    # corrected_words = []
-    # for word in words:
-    # Only correct non-profanity words
-    # if not profanity.contains_profanity(word.lower()):
-    # corrected_word = spell.correction(word)
-    # corrected_words.append(corrected_word)
-    # else:
-    # corrected_words.append(word)
-    # sanitized_message = " ".join(corrected_words)
 
     # Prevent any bad words
     safe_message = profanity.censor(sanitized_message)
