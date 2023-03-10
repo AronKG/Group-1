@@ -1,0 +1,151 @@
+body {}
+
+/* Add styles for the chat app */
+.chat-container {
+    position: absolute;
+    /* Add this line */
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    width: 50%;
+    margin-left: 20%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 4px #ccc;
+    border-radius: 4px;
+}
+
+.chat-header {
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    font-weight: bold;
+
+}
+
+.chat-messages {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow-y: scroll;
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    max-width: 100%;
+}
+
+.message-username {
+    font-weight: bold;
+    margin-right: 10px;
+    font-family: "Courier New";
+}
+
+#highlight-connect {
+    background-color: #99bbff;
+}
+
+#highlight-disconnect {
+    background-color: #e32020;
+}
+
+.chat-input {
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    display: flex;
+}
+
+.chat-input input {
+    flex-grow: 1;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    font-family: "Courier New";
+}
+
+.chat-input button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: "Courier New";
+}
+
+@font-face {
+    font-family: gagga;
+    src: url("../LEMONMILK-Bold.otf") format("opentype");
+}
+
+@font-face {
+    font-family: "Courier New", Courier New, Monospace;
+}
+
+#grönis {
+    background-color: #608e45;
+    color: whitesmoke;
+    font-family: gagga;
+    font-size: 50px;
+    margin: 10px;
+}
+
+.message-sent {
+    font-family: "Courier New";
+}
+
+
+
+@media screen and (max-width: 790px) {
+
+    /* Adjust the width and margin of the chat container */
+    .chat-container {
+        width: 100%;
+        height: 80%;
+        margin-top: 30%;
+        margin-left: 0%;
+    }
+
+
+    body {
+        margin: 0%;
+    }
+
+    #grönis {
+        font-size: 30px;
+        padding: 0px;
+    }
+
+    /* Adjust the font size and padding of the message input */
+    .chat-input input {
+        padding: 5px;
+        font-size: 18px;
+    }
+
+    .chat-input button {
+        padding: 5px;
+        font-size: 14px;
+    }
+
+    /* Adjust the font size of the chat header */
+    .chat-header h1 {
+        font-size: 20px;
+    }
+}
+
+@media (min-width:500px) and (max-width:790px) {
+
+    .chat-container {
+        width: 100%;
+        height: 90%;
+        margin-top: 15%;
+        margin-left: 0%;
+    }
+
+}
